@@ -5,6 +5,7 @@
 💥 **Breaking changes**
 
 - Minimum PHP version is now 8.1
+- `PDOProviderConfiguration` no longer has getters, its properties are `public readonly`
 
 ## [0.8.0](https://github.com/brick/money/releases/tag/0.8.0) - 2023-01-16
 
