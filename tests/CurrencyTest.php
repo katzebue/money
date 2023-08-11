@@ -29,7 +29,7 @@ class CurrencyTest extends AbstractTestCase
         $this->assertCurrencyEquals($currencyCode, $numericCode, $name, $fractionDigits, $currency);
     }
 
-    public function providerOf() : array
+    public static function providerOf() : array
     {
         return [
             ['USD', 840, 2, 'US Dollar'],
@@ -49,7 +49,7 @@ class CurrencyTest extends AbstractTestCase
         Currency::of($currencyCode);
     }
 
-    public function providerOfUnknownCurrencyCode() : array
+    public static function providerOfUnknownCurrencyCode() : array
     {
         return [
             ['XXX'],
@@ -85,7 +85,7 @@ class CurrencyTest extends AbstractTestCase
         }
     }
 
-    public function providerOfCountry() : array
+    public static function providerOfCountry() : array
     {
         return [
             ['CA', 'CAD'],
