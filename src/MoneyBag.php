@@ -35,7 +35,7 @@ final class MoneyBag implements MoneyContainer
     public function getAmount(Currency|string|int $currency) : BigRational
     {
         if (is_int($currency)) {
-            $currencyCode = (string) Currency::of($currency);
+            $currencyCode = Currency::of($currency)->__toString();
         } else {
             $currencyCode = (string) $currency;
         }

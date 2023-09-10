@@ -9,11 +9,10 @@ use Brick\Money\Currency;
 use Brick\Money\Money;
 use Brick\Money\MoneyBag;
 use Brick\Money\RationalMoney;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Depends;
 
-/**
- * Tests for class MoneyBag.
- */
+#[CoversClass(MoneyBag::class)]
 final class MoneyBagTest extends AbstractTestCase
 {
     public function testEmptyMoneyBag() : void
@@ -24,6 +23,9 @@ final class MoneyBagTest extends AbstractTestCase
 
         foreach (['USD', 'EUR', 'GBP', 'JPY'] as $currencyCode) {
             self::assertTrue($moneyBag->getAmount($currencyCode)->isZero());
+        }
+        foreach ([643, '124'] as $numericCurrencyCode) {
+            self::assertTrue($moneyBag->getAmount($numericCurrencyCode)->isZero());
         }
     }
 
