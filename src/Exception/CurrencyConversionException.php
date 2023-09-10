@@ -9,34 +9,27 @@ namespace Brick\Money\Exception;
  */
 class CurrencyConversionException extends MoneyException
 {
-    private readonly string $sourceCurrencyCode;
-
-    private readonly string $targetCurrencyCode;
-
     /**
      * CurrencyConversionException constructor.
-     *
-     * @param string $message
-     * @param string $sourceCurrencyCode
-     * @param string $targetCurrencyCode
      */
-    public function __construct(string $message, string $sourceCurrencyCode, string $targetCurrencyCode)
-    {
+    public function __construct(
+        string $message,
+        private readonly string $sourceCurrencyCode,
+        private readonly string $targetCurrencyCode
+    ) {
         parent::__construct($message);
-
-        $this->sourceCurrencyCode = $sourceCurrencyCode;
-        $this->targetCurrencyCode = $targetCurrencyCode;
     }
 
     /**
-     * @param string      $sourceCurrencyCode
-     * @param string      $targetCurrencyCode
      * @param string|null $info
      *
      * @return CurrencyConversionException
      */
-    public static function exchangeRateNotAvailable(string $sourceCurrencyCode, string $targetCurrencyCode, ?string $info = null) : self
-    {
+    public static function exchangeRateNotAvailable(
+        string $sourceCurrencyCode,
+        string $targetCurrencyCode,
+        ?string $info = null
+    ): self {
         $message = sprintf(
             'No exchange rate available to convert %s to %s',
             $sourceCurrencyCode,
@@ -50,18 +43,12 @@ class CurrencyConversionException extends MoneyException
         return new self($message, $sourceCurrencyCode, $targetCurrencyCode);
     }
 
-    /**
-     * @return string
-     */
-    public function getSourceCurrencyCode() : string
+    final public function getSourceCurrencyCode(): string
     {
         return $this->sourceCurrencyCode;
     }
 
-    /**
-     * @return string
-     */
-    public function getTargetCurrencyCode() : string
+    final public function getTargetCurrencyCode(): string
     {
         return $this->targetCurrencyCode;
     }

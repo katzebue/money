@@ -20,14 +20,13 @@ final class ConfigurableProvider implements ExchangeRateProvider
     private array $exchangeRates = [];
 
     /**
-     * @param string                     $sourceCurrencyCode
-     * @param string                     $targetCurrencyCode
-     * @param BigNumber|int|float|string $exchangeRate
-     *
      * @return ConfigurableProvider This instance, for chaining.
      */
-    public function setExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode, $exchangeRate) : self
-    {
+    public function setExchangeRate(
+        string $sourceCurrencyCode,
+        string $targetCurrencyCode,
+        BigNumber|int|float|string $exchangeRate
+    ): self {
         $this->exchangeRates[$sourceCurrencyCode][$targetCurrencyCode] = $exchangeRate;
 
         return $this;

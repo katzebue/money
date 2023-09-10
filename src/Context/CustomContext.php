@@ -13,28 +13,25 @@ use Brick\Money\Currency;
 /**
  * Adjusts a number to a custom scale, and optionally step.
  */
-final class CustomContext implements Context
+final readonly class CustomContext implements Context
 {
-    /**
-     * The scale of the monies using this context.
-     */
-    private readonly int $scale;
-
-    /**
-     * An optional cash rounding step. Must be a multiple of 2 and/or 5.
-     *
-     * For example, scale=4 and step=5 would allow amounts of 0.0000, 0.0005, 0.0010, etc.
-     */
-    private readonly int $step;
-
     /**
      * @param int $scale The scale of the monies using this context.
      * @param int $step  An optional cash rounding step. Must be a multiple of 2 and/or 5.
      */
-    public function __construct(int $scale, int $step = 1)
+    public function __construct(
+        /**
+         * The scale of the monies using this context.
+         */
+        private int $scale,
+        /**
+         * An optional cash rounding step. Must be a multiple of 2 and/or 5.
+         *
+         * For example, scale=4 and step=5 would allow amounts of 0.0000, 0.0005, 0.0010, etc.
+         */
+        private int $step = 1
+    )
     {
-        $this->scale = $scale;
-        $this->step  = $step;
     }
 
     /**

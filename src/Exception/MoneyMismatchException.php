@@ -12,8 +12,6 @@ use Brick\Money\Currency;
 class MoneyMismatchException extends MoneyException
 {
     /**
-     * @param Currency $expected
-     * @param Currency $actual
      *
      * @return MoneyMismatchException
      */
@@ -27,8 +25,6 @@ class MoneyMismatchException extends MoneyException
     }
 
     /**
-     * @param string $method
-     *
      * @return MoneyMismatchException
      */
     public static function contextMismatch(string $method) : self

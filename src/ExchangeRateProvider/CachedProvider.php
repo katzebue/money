@@ -13,11 +13,6 @@ use Brick\Money\ExchangeRateProvider;
 final class CachedProvider implements ExchangeRateProvider
 {
     /**
-     * The underlying exchange rate provider.
-     */
-    private readonly ExchangeRateProvider $provider;
-
-    /**
      * The cached exchange rates.
      *
      * @psalm-var array<string, array<string, BigNumber|int|float|string>>
@@ -26,12 +21,14 @@ final class CachedProvider implements ExchangeRateProvider
 
     /**
      * Class constructor.
-     *
-     * @param ExchangeRateProvider $provider
      */
-    public function __construct(ExchangeRateProvider $provider)
+    public function __construct(
+        /**
+         * The underlying exchange rate provider.
+         */
+        private readonly ExchangeRateProvider $provider
+    )
     {
-        $this->provider = $provider;
     }
 
     /**

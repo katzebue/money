@@ -14,19 +14,18 @@ use Brick\Math\RoundingMode;
 /**
  * Converts monies into different currencies, using an exchange rate provider.
  */
-final class CurrencyConverter
+final readonly class CurrencyConverter
 {
-    /**
-     * The exchange rate provider.
-     */
-    private readonly ExchangeRateProvider $exchangeRateProvider;
-
     /**
      * @param ExchangeRateProvider $exchangeRateProvider The exchange rate provider.
      */
-    public function __construct(ExchangeRateProvider $exchangeRateProvider)
+    public function __construct(
+        /**
+         * The exchange rate provider.
+         */
+        private ExchangeRateProvider $exchangeRateProvider
+    )
     {
-        $this->exchangeRateProvider = $exchangeRateProvider;
     }
 
     /**

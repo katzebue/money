@@ -21,7 +21,7 @@ use Brick\Math\RoundingMode;
 /**
  * Unit tests for class RationalMoney.
  */
-class RationalMoneyTest extends AbstractTestCase
+final class RationalMoneyTest extends AbstractTestCase
 {
     public function testGetters() : void
     {
@@ -208,7 +208,7 @@ class RationalMoneyTest extends AbstractTestCase
     public function testJsonSerialize(RationalMoney $money, array $expected): void
     {
         self::assertSame($expected, $money->jsonSerialize());
-        self::assertSame(json_encode($expected), json_encode($money));
+        self::assertSame(json_encode($expected, JSON_THROW_ON_ERROR), json_encode($money, JSON_THROW_ON_ERROR));
     }
 
     public static function providerJsonSerialize(): array

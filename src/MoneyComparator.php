@@ -16,21 +16,20 @@ use Brick\Money\Exception\CurrencyConversionException;
  * This order is important because some exchange rate providers may only have one-way rates,
  * or may use a different rate in each direction.
  */
-final class MoneyComparator
+final readonly class MoneyComparator
 {
-    /**
-     * The exchange rate provider.
-     */
-    private readonly ExchangeRateProvider $exchangeRateProvider;
-
     /**
      * Class constructor.
      *
-     * @param ExchangeRateProvider $provider The exchange rate provider.
+     * @param ExchangeRateProvider $exchangeRateProvider The exchange rate provider.
      */
-    public function __construct(ExchangeRateProvider $provider)
+    public function __construct(
+        /**
+         * The exchange rate provider.
+         */
+        private ExchangeRateProvider $exchangeRateProvider
+    )
     {
-        $this->exchangeRateProvider = $provider;
     }
 
     /**
@@ -43,8 +42,6 @@ final class MoneyComparator
      * This order is important if the exchange rate provider uses different exchange rates
      * when converting back and forth two currencies.
      *
-     * @param Money $a
-     * @param Money $b
      *
      * @return int -1, 0 or 1.
      *
@@ -70,8 +67,6 @@ final class MoneyComparator
     }
 
     /**
-     * @param Money $a
-     * @param Money $b
      *
      * @return bool
      *
@@ -83,8 +78,6 @@ final class MoneyComparator
     }
 
     /**
-     * @param Money $a
-     * @param Money $b
      *
      * @return bool
      *
@@ -96,8 +89,6 @@ final class MoneyComparator
     }
 
     /**
-     * @param Money $a
-     * @param Money $b
      *
      * @return bool
      *
@@ -109,8 +100,6 @@ final class MoneyComparator
     }
 
     /**
-     * @param Money $a
-     * @param Money $b
      *
      * @return bool
      *
@@ -122,8 +111,6 @@ final class MoneyComparator
     }
 
     /**
-     * @param Money $a
-     * @param Money $b
      *
      * @return bool
      *
@@ -155,9 +142,9 @@ final class MoneyComparator
     {
         $min = $money;
 
-        foreach ($monies as $money) {
-            if ($this->isGreater($min, $money)) {
-                $min = $money;
+        foreach ($monies as $currentMoney) {
+            if ($this->isGreater($min, $currentMoney)) {
+                $min = $currentMoney;
             }
         }
 
@@ -185,9 +172,9 @@ final class MoneyComparator
     {
         $max = $money;
 
-        foreach ($monies as $money) {
-            if ($this->isLess($max, $money)) {
-                $max = $money;
+        foreach ($monies as $currentMoney) {
+            if ($this->isLess($max, $currentMoney)) {
+                $max = $currentMoney;
             }
         }
 

@@ -4,7 +4,7 @@
 
 💥 **Breaking changes**
 
-- Minimum PHP version is now 8.1
+- Minimum PHP version is now 8.2
 - `PDOProviderConfiguration` no longer has getters, its properties are `public readonly`
 - `RoundingMode` from `brick/math` is now an enum, so:
   - all methods accepting an `int` rounding mode now accept a `RoundingMode` instance instead

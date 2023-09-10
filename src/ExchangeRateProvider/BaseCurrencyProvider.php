@@ -18,26 +18,23 @@ use Brick\Math\BigRational;
  * using this provider on top of it would allow you to get an exchange rate from EUR to USD, GBP to USD,
  * or even EUR to GBP and GBP to EUR.
  */
-final class BaseCurrencyProvider implements ExchangeRateProvider
+final readonly class BaseCurrencyProvider implements ExchangeRateProvider
 {
-    /**
-     * The provider for rates relative to the base currency.
-     */
-    private readonly ExchangeRateProvider $provider;
-
-    /**
-     * The code of the currency all the exchanges rates are based on.
-     */
-    private readonly string $baseCurrencyCode;
-
     /**
      * @param ExchangeRateProvider $provider         The provider for rates relative to the base currency.
      * @param string               $baseCurrencyCode The code of the currency all the exchanges rates are based on.
      */
-    public function __construct(ExchangeRateProvider $provider, string $baseCurrencyCode)
+    public function __construct(
+        /**
+         * The provider for rates relative to the base currency.
+         */
+        private ExchangeRateProvider $provider,
+        /**
+         * The code of the currency all the exchanges rates are based on.
+         */
+        private string $baseCurrencyCode
+    )
     {
-        $this->provider         = $provider;
-        $this->baseCurrencyCode = $baseCurrencyCode;
     }
 
     /**

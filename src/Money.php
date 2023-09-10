@@ -33,31 +33,21 @@ use InvalidArgumentException;
  */
 final class Money extends AbstractMoney
 {
-    /**
-     * The amount.
-     */
-    private readonly BigDecimal $amount;
-
-    /**
-     * The currency.
-     */
-    private readonly Currency $currency;
-
-    /**
-     * The context that defines the capability of this Money.
-     */
-    private readonly Context $context;
-
-    /**
-     * @param BigDecimal $amount
-     * @param Currency   $currency
-     * @param Context    $context
-     */
-    private function __construct(BigDecimal $amount, Currency $currency, Context $context)
+    private function __construct(
+        /**
+         * The amount.
+         */
+        private readonly BigDecimal $amount,
+        /**
+         * The currency.
+         */
+        private readonly Currency $currency,
+        /**
+         * The context that defines the capability of this Money.
+         */
+        private readonly Context $context
+    )
     {
-        $this->amount   = $amount;
-        $this->currency = $currency;
-        $this->context  = $context;
     }
 
     /**
@@ -76,9 +66,9 @@ final class Money extends AbstractMoney
     {
         $min = $money;
 
-        foreach ($monies as $money) {
-            if ($money->isLessThan($min)) {
-                $min = $money;
+        foreach ($monies as $currentMoney) {
+            if ($currentMoney->isLessThan($min)) {
+                $min = $currentMoney;
             }
         }
 
@@ -101,9 +91,9 @@ final class Money extends AbstractMoney
     {
         $max = $money;
 
-        foreach ($monies as $money) {
-            if ($money->isGreaterThan($max)) {
-                $max = $money;
+        foreach ($monies as $currentMoney) {
+            if ($currentMoney->isGreaterThan($max)) {
+                $max = $currentMoney;
             }
         }
 
@@ -126,8 +116,8 @@ final class Money extends AbstractMoney
     {
         $total = $money;
 
-        foreach ($monies as $money) {
-            $total = $total->plus($money);
+        foreach ($monies as $currentMoney) {
+            $total = $total->plus($currentMoney);
         }
 
         return $total;
@@ -502,24 +492,24 @@ final class Money extends AbstractMoney
      *
      * @return Money[]
      *
-     * @throws \InvalidArgumentException If called with invalid parameters.
+     * @throws InvalidArgumentException If called with invalid parameters.
      */
     public function allocate(int ...$ratios) : array
     {
         if (! $ratios) {
-            throw new \InvalidArgumentException('Cannot allocate() an empty list of ratios.');
+            throw new InvalidArgumentException('Cannot allocate() an empty list of ratios.');
         }
 
         foreach ($ratios as $ratio) {
             if ($ratio < 0) {
-                throw new \InvalidArgumentException('Cannot allocate() negative ratios.');
+                throw new InvalidArgumentException('Cannot allocate() negative ratios.');
             }
         }
 
         $total = array_sum($ratios);
 
         if ($total === 0) {
-            throw new \InvalidArgumentException('Cannot allocate() to zero ratios only.');
+            throw new InvalidArgumentException('Cannot allocate() to zero ratios only.');
         }
 
         $step = $this->context->getStep();
@@ -567,24 +557,24 @@ final class Money extends AbstractMoney
      *
      * @return Money[]
      *
-     * @throws \InvalidArgumentException If called with invalid parameters.
+     * @throws InvalidArgumentException If called with invalid parameters.
      */
     public function allocateWithRemainder(int ...$ratios) : array
     {
         if (! $ratios) {
-            throw new \InvalidArgumentException('Cannot allocateWithRemainder() an empty list of ratios.');
+            throw new InvalidArgumentException('Cannot allocateWithRemainder() an empty list of ratios.');
         }
 
         foreach ($ratios as $ratio) {
             if ($ratio < 0) {
-                throw new \InvalidArgumentException('Cannot allocateWithRemainder() negative ratios.');
+                throw new InvalidArgumentException('Cannot allocateWithRemainder() negative ratios.');
             }
         }
 
         $total = array_sum($ratios);
 
         if ($total === 0) {
-            throw new \InvalidArgumentException('Cannot allocateWithRemainder() to zero ratios only.');
+            throw new InvalidArgumentException('Cannot allocateWithRemainder() to zero ratios only.');
         }
 
         $ratios = $this->simplifyRatios(array_values($ratios));
@@ -645,12 +635,12 @@ final class Money extends AbstractMoney
      *
      * @return Money[]
      *
-     * @throws \InvalidArgumentException If called with invalid parameters.
+     * @throws InvalidArgumentException If called with invalid parameters.
      */
     public function split(int $parts) : array
     {
         if ($parts < 1) {
-            throw new \InvalidArgumentException('Cannot split() into less than 1 part.');
+            throw new InvalidArgumentException('Cannot split() into less than 1 part.');
         }
 
         return $this->allocate(...array_fill(0, $parts, 1));
@@ -668,12 +658,12 @@ final class Money extends AbstractMoney
      *
      * @return Money[]
      *
-     * @throws \InvalidArgumentException If called with invalid parameters.
+     * @throws InvalidArgumentException If called with invalid parameters.
      */
     public function splitWithRemainder(int $parts) : array
     {
         if ($parts < 1) {
-            throw new \InvalidArgumentException('Cannot splitWithRemainder() into less than 1 part.');
+            throw new InvalidArgumentException('Cannot splitWithRemainder() into less than 1 part.');
         }
 
         return $this->allocateWithRemainder(...array_fill(0, $parts, 1));

@@ -188,7 +188,6 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * Unlike isEqualTo(), this method only accepts a money, and returns false if the given money is in another
      * currency, instead of throwing a MoneyMismatchException.
      *
-     * @param AbstractMoney $that
      *
      * @return bool
      */

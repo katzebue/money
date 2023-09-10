@@ -18,20 +18,14 @@ use Brick\Math\Exception\MathException;
  */
 final class RationalMoney extends AbstractMoney
 {
-    private readonly BigRational $amount;
-
-    private readonly Currency $currency;
-
     /**
      * Class constructor.
      *
      * @param BigRational $amount   The amount.
      * @param Currency    $currency The currency.
      */
-    public function __construct(BigRational $amount, Currency $currency)
+    public function __construct(private readonly BigRational $amount, private readonly Currency $currency)
     {
-        $this->amount   = $amount;
-        $this->currency = $currency;
     }
 
     /**

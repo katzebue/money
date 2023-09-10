@@ -34,8 +34,6 @@ final class PDOProvider implements ExchangeRateProvider
     private array $parameters = [];
 
     /**
-     * @param \PDO                     $pdo
-     * @param PDOProviderConfiguration $configuration
      *
      * @throws \InvalidArgumentException
      */

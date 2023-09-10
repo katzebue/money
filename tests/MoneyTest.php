@@ -24,7 +24,7 @@ use Brick\Math\Exception\RoundingNecessaryException;
 /**
  * Unit tests for class Money.
  */
-class MoneyTest extends AbstractTestCase
+final class MoneyTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerOf
@@ -99,7 +99,7 @@ class MoneyTest extends AbstractTestCase
     public function testZero(string $currency, ?Context $context, string $expected) : void
     {
         $actual = Money::zero($currency, $context);
-        $this->assertMoneyIs($expected, $actual, $context === null ? new DefaultContext() : $context);
+        $this->assertMoneyIs($expected, $actual, $context ?? new DefaultContext());
     }
 
     public static function providerZero() : array
@@ -1013,7 +1013,7 @@ class MoneyTest extends AbstractTestCase
     public function testJsonSerialize(Money $money, array $expected): void
     {
         self::assertSame($expected, $money->jsonSerialize());
-        self::assertSame(json_encode($expected), json_encode($money));
+        self::assertSame(json_encode($expected, JSON_THROW_ON_ERROR), json_encode($money, JSON_THROW_ON_ERROR));
     }
 
     public static function providerJsonSerialize(): array
