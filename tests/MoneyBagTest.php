@@ -9,11 +9,12 @@ use Brick\Money\Currency;
 use Brick\Money\Money;
 use Brick\Money\MoneyBag;
 use Brick\Money\RationalMoney;
+use PHPUnit\Framework\Attributes\Depends;
 
 /**
  * Tests for class MoneyBag.
  */
-class MoneyBagTest extends AbstractTestCase
+final class MoneyBagTest extends AbstractTestCase
 {
     public function testEmptyMoneyBag() : void
     {
@@ -51,9 +52,7 @@ class MoneyBagTest extends AbstractTestCase
         return $moneyBag;
     }
 
-    /**
-     * @depends testAddSubtractMoney
-     */
+    #[Depends('testAddSubtractMoney')]
     public function testAddCustomCurrency(MoneyBag $moneyBag) : void
     {
         $moneyBag->add(Money::of('0.1234', new Currency('BTC', 0, 'Bitcoin', 8)));

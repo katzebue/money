@@ -17,6 +17,8 @@ use Brick\Money\RationalMoney;
 use Brick\Math\BigRational;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Unit tests for class RationalMoney.
@@ -34,9 +36,7 @@ final class RationalMoneyTest extends AbstractTestCase
         self::assertSame($currency, $money->getCurrency());
     }
 
-    /**
-     * @dataProvider providerPlus
-     */
+    #[DataProvider('providerPlus')]
     public function testPlus(array $rationalMoney, mixed $amount, string $expected) : void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
@@ -52,22 +52,18 @@ final class RationalMoneyTest extends AbstractTestCase
         }
     }
 
-    public static function providerPlus() : array
+    public static function providerPlus(): Iterator
     {
-        return [
-            [['1.1234', 'USD'], '987.65', 'USD 988773400/1000000'],
-            [['123/456', 'GBP'], '14.99', 'GBP 695844/45600'],
-            [['123/456', 'GBP'], '567/890', 'GBP 368022/405840'],
-            [['1.123', 'CHF'], RationalMoney::of('0.1', 'CHF'), 'CHF 12230/10000'],
-            [['1.123', 'CHF'], RationalMoney::of('0.1', 'CAD'), MoneyMismatchException::class],
-            [['9.876', 'CAD'], Money::of(3, 'CAD'), 'CAD 1287600/100000'],
-            [['9.876', 'CAD'], Money::of(3, 'USD'), MoneyMismatchException::class]
-        ];
+        yield [['1.1234', 'USD'], '987.65', 'USD 988773400/1000000'];
+        yield [['123/456', 'GBP'], '14.99', 'GBP 695844/45600'];
+        yield [['123/456', 'GBP'], '567/890', 'GBP 368022/405840'];
+        yield [['1.123', 'CHF'], RationalMoney::of('0.1', 'CHF'), 'CHF 12230/10000'];
+        yield [['1.123', 'CHF'], RationalMoney::of('0.1', 'CAD'), MoneyMismatchException::class];
+        yield [['9.876', 'CAD'], Money::of(3, 'CAD'), 'CAD 1287600/100000'];
+        yield [['9.876', 'CAD'], Money::of(3, 'USD'), MoneyMismatchException::class];
     }
 
-    /**
-     * @dataProvider providerMinus
-     */
+    #[DataProvider('providerMinus')]
     public function testMinus(array $rationalMoney, mixed $amount, string $expected) : void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
@@ -83,22 +79,18 @@ final class RationalMoneyTest extends AbstractTestCase
         }
     }
 
-    public static function providerMinus() : array
+    public static function providerMinus(): Iterator
     {
-        return [
-            [['987.65', 'USD'], '1.1234', 'USD 986526600/1000000'],
-            [['123/456', 'GBP'], '14.99', 'GBP -671244/45600'],
-            [['123/456', 'GBP'], '567/890', 'GBP -149082/405840'],
-            [['1.123', 'CHF'], RationalMoney::of('0.1', 'CHF'), 'CHF 10230/10000'],
-            [['1.123', 'CHF'], RationalMoney::of('0.1', 'CAD'), MoneyMismatchException::class],
-            [['9.876', 'CAD'], Money::of(3, 'CAD'), 'CAD 687600/100000'],
-            [['9.876', 'CAD'], Money::of(3, 'USD'), MoneyMismatchException::class]
-        ];
+        yield [['987.65', 'USD'], '1.1234', 'USD 986526600/1000000'];
+        yield [['123/456', 'GBP'], '14.99', 'GBP -671244/45600'];
+        yield [['123/456', 'GBP'], '567/890', 'GBP -149082/405840'];
+        yield [['1.123', 'CHF'], RationalMoney::of('0.1', 'CHF'), 'CHF 10230/10000'];
+        yield [['1.123', 'CHF'], RationalMoney::of('0.1', 'CAD'), MoneyMismatchException::class];
+        yield [['9.876', 'CAD'], Money::of(3, 'CAD'), 'CAD 687600/100000'];
+        yield [['9.876', 'CAD'], Money::of(3, 'USD'), MoneyMismatchException::class];
     }
 
-    /**
-     * @dataProvider providerMultipliedBy
-     */
+    #[DataProvider('providerMultipliedBy')]
     public function testMultipliedBy(array $rationalMoney, mixed $operand, string $expected) : void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
@@ -114,18 +106,14 @@ final class RationalMoneyTest extends AbstractTestCase
         }
     }
 
-    public static function providerMultipliedBy() : array
+    public static function providerMultipliedBy(): Iterator
     {
-        return [
-            [['987.65', 'USD'], '1.123456', 'USD 110958131840/100000000'],
-            [['123/456', 'GBP'], '14.99', 'GBP 184377/45600'],
-            [['123/456', 'GBP'], '567/890', 'GBP 69741/405840'],
-        ];
+        yield [['987.65', 'USD'], '1.123456', 'USD 110958131840/100000000'];
+        yield [['123/456', 'GBP'], '14.99', 'GBP 184377/45600'];
+        yield [['123/456', 'GBP'], '567/890', 'GBP 69741/405840'];
     }
 
-    /**
-     * @dataProvider providerDividedBy
-     */
+    #[DataProvider('providerDividedBy')]
     public function testDividedBy(array $rationalMoney, mixed $operand, string $expected) : void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
@@ -141,19 +129,15 @@ final class RationalMoneyTest extends AbstractTestCase
         }
     }
 
-    public static function providerDividedBy() : array
+    public static function providerDividedBy(): Iterator
     {
-        return [
-            [['987.65', 'USD'], '1.123456', 'USD 98765000000/112345600'],
-            [['987.65', 'USD'], '5', 'USD 98765/500'],
-            [['123/456', 'GBP'], '14.99', 'GBP 12300/683544'],
-            [['123/456', 'GBP'], '567/890', 'GBP 109470/258552'],
-        ];
+        yield [['987.65', 'USD'], '1.123456', 'USD 98765000000/112345600'];
+        yield [['987.65', 'USD'], '5', 'USD 98765/500'];
+        yield [['123/456', 'GBP'], '14.99', 'GBP 12300/683544'];
+        yield [['123/456', 'GBP'], '567/890', 'GBP 109470/258552'];
     }
 
-    /**
-     * @dataProvider providerSimplified
-     */
+    #[DataProvider('providerSimplified')]
     public function testSimplified(array $rationalMoney, string $expected) : void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
@@ -162,19 +146,15 @@ final class RationalMoneyTest extends AbstractTestCase
         $this->assertRationalMoneyEquals($expected, $actual);
     }
 
-    public static function providerSimplified() : array
+    public static function providerSimplified(): Iterator
     {
-        return [
-            [['123456/10000', 'USD'], 'USD 7716/625'],
-            [['695844/45600', 'CAD'], 'CAD 57987/3800'],
-            [['368022/405840', 'EUR'], 'EUR 61337/67640'],
-            [['-671244/45600', 'GBP'], 'GBP -55937/3800'],
-        ];
+        yield [['123456/10000', 'USD'], 'USD 7716/625'];
+        yield [['695844/45600', 'CAD'], 'CAD 57987/3800'];
+        yield [['368022/405840', 'EUR'], 'EUR 61337/67640'];
+        yield [['-671244/45600', 'GBP'], 'GBP -55937/3800'];
     }
 
-    /**
-     * @dataProvider providerTo
-     */
+    #[DataProvider('providerTo')]
     public function testTo(array $rationalMoney, Context $context, RoundingMode $roundingMode, string $expected) : void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
@@ -190,32 +170,26 @@ final class RationalMoneyTest extends AbstractTestCase
         }
     }
 
-    public static function providerTo() : array
+    public static function providerTo(): Iterator
     {
-        return [
-            [['987.65', 'USD'], new DefaultContext(), RoundingMode::UNNECESSARY, 'USD 987.65'],
-            [['246/200', 'USD'], new DefaultContext(), RoundingMode::UNNECESSARY, 'USD 1.23'],
-            [['987.65', 'CZK'], new CashContext(100), RoundingMode::UP, 'CZK 988.00'],
-            [['123/456', 'GBP'], new CustomContext(4), RoundingMode::UP, 'GBP 0.2698'],
-            [['123/456', 'GBP'], new AutoContext(), RoundingMode::UNNECESSARY, RoundingNecessaryException::class],
-            [['123456789/256', 'CHF'], new AutoContext(), RoundingMode::UNNECESSARY, 'CHF 482253.08203125']
-        ];
+        yield [['987.65', 'USD'], new DefaultContext(), RoundingMode::UNNECESSARY, 'USD 987.65'];
+        yield [['246/200', 'USD'], new DefaultContext(), RoundingMode::UNNECESSARY, 'USD 1.23'];
+        yield [['987.65', 'CZK'], new CashContext(100), RoundingMode::UP, 'CZK 988.00'];
+        yield [['123/456', 'GBP'], new CustomContext(4), RoundingMode::UP, 'GBP 0.2698'];
+        yield [['123/456', 'GBP'], new AutoContext(), RoundingMode::UNNECESSARY, RoundingNecessaryException::class];
+        yield [['123456789/256', 'CHF'], new AutoContext(), RoundingMode::UNNECESSARY, 'CHF 482253.08203125'];
     }
 
-    /**
-     * @dataProvider providerJsonSerialize
-     */
+    #[DataProvider('providerJsonSerialize')]
     public function testJsonSerialize(RationalMoney $money, array $expected): void
     {
         self::assertSame($expected, $money->jsonSerialize());
         self::assertSame(json_encode($expected, JSON_THROW_ON_ERROR), json_encode($money, JSON_THROW_ON_ERROR));
     }
 
-    public static function providerJsonSerialize(): array
+    public static function providerJsonSerialize(): Iterator
     {
-        return [
-            [RationalMoney::of('3.5', 'EUR'), ['amount' => '35/10', 'currency' => 'EUR']],
-            [RationalMoney::of('3.888923', 'GBP'), ['amount' => '3888923/1000000', 'currency' => 'GBP']]
-        ];
+        yield [RationalMoney::of('3.5', 'EUR'), ['amount' => '35/10', 'currency' => 'EUR']];
+        yield [RationalMoney::of('3.888923', 'GBP'), ['amount' => '3888923/1000000', 'currency' => 'GBP']];
     }
 }

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Brick\Money;
 
 use Brick\Money\Exception\UnknownCurrencyException;
+use InvalidArgumentException;
 use Stringable;
 
 /**
  * A currency. This class is immutable.
+ * @see \Brick\Money\Tests\CurrencyTest
  */
 final class Currency implements Stringable
 {
@@ -55,7 +57,7 @@ final class Currency implements Stringable
     private readonly string $name, int $defaultFractionDigits)
     {
         if ($defaultFractionDigits < 0) {
-            throw new \InvalidArgumentException('The default fraction digits cannot be less than zero.');
+            throw new InvalidArgumentException('The default fraction digits cannot be less than zero.');
         }
         $this->defaultFractionDigits = $defaultFractionDigits;
     }

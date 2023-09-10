@@ -6,20 +6,23 @@ namespace Brick\Money\Tests;
 
 use Brick\Money\Currency;
 use Brick\Money\Exception\UnknownCurrencyException;
+use InvalidArgumentException;
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Unit tests for class Currency.
  */
-class CurrencyTest extends AbstractTestCase
+final class CurrencyTest extends AbstractTestCase
 {
     /**
-     * @dataProvider providerOf
      *
      * @param string $currencyCode   The currency code.
      * @param int    $numericCode    The currency's numeric code.
      * @param int    $fractionDigits The currency's default fraction digits.
      * @param string $name           The currency's name.
      */
+    #[DataProvider('providerOf')]
     public function testOf(string $currencyCode, int $numericCode, int $fractionDigits, string $name) : void
     {
         $currency = Currency::of($currencyCode);
@@ -29,32 +32,26 @@ class CurrencyTest extends AbstractTestCase
         $this->assertCurrencyEquals($currencyCode, $numericCode, $name, $fractionDigits, $currency);
     }
 
-    public static function providerOf() : array
+    public static function providerOf(): Iterator
     {
-        return [
-            ['USD', 840, 2, 'US Dollar'],
-            ['EUR', 978, 2, 'Euro'],
-            ['GBP', 826, 2, 'Pound Sterling'],
-            ['JPY', 392, 0, 'Yen'],
-            ['DZD', 12, 2, 'Algerian Dinar'],
-        ];
+        yield ['USD', 840, 2, 'US Dollar'];
+        yield ['EUR', 978, 2, 'Euro'];
+        yield ['GBP', 826, 2, 'Pound Sterling'];
+        yield ['JPY', 392, 0, 'Yen'];
+        yield ['DZD', 12, 2, 'Algerian Dinar'];
     }
 
-    /**
-     * @dataProvider providerOfUnknownCurrencyCode
-     */
+    #[DataProvider('providerOfUnknownCurrencyCode')]
     public function testOfUnknownCurrencyCode(string|int $currencyCode) : void
     {
         $this->expectException(UnknownCurrencyException::class);
         Currency::of($currencyCode);
     }
 
-    public static function providerOfUnknownCurrencyCode() : array
+    public static function providerOfUnknownCurrencyCode(): Iterator
     {
-        return [
-            ['XXX'],
-            [-1],
-        ];
+        yield ['XXX'];
+        yield [-1];
     }
 
     public function testConstructor() : void
@@ -68,9 +65,7 @@ class CurrencyTest extends AbstractTestCase
         self::assertSame(Currency::of('EUR'), Currency::of('EUR'));
     }
 
-    /**
-     * @dataProvider providerOfCountry
-     */
+    #[DataProvider('providerOfCountry')]
     public function testOfCountry(string $countryCode, string $expected) : void
     {
         if ($this->isExceptionClass($expected)) {
@@ -85,26 +80,26 @@ class CurrencyTest extends AbstractTestCase
         }
     }
 
-    public static function providerOfCountry() : array
+    public static function providerOfCountry(): Iterator
     {
-        return [
-            ['CA', 'CAD'],
-            ['CH', 'CHF'],
-            ['DE', 'EUR'],
-            ['ES', 'EUR'],
-            ['FR', 'EUR'],
-            ['GB', 'GBP'],
-            ['IT', 'EUR'],
-            ['US', 'USD'],
-            ['AQ', UnknownCurrencyException::class], // no currency
-            ['CU', UnknownCurrencyException::class], // 2 currencies
-            ['XX', UnknownCurrencyException::class], // unknown
-        ];
+        yield ['CA', 'CAD'];
+        yield ['CH', 'CHF'];
+        yield ['DE', 'EUR'];
+        yield ['ES', 'EUR'];
+        yield ['FR', 'EUR'];
+        yield ['GB', 'GBP'];
+        yield ['IT', 'EUR'];
+        yield ['US', 'USD'];
+        yield ['AQ', UnknownCurrencyException::class];
+        // no currency
+        yield ['CU', UnknownCurrencyException::class];
+        // 2 currencies
+        yield ['XX', UnknownCurrencyException::class];
     }
 
     public function testCreateWithNegativeFractionDigits() : void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         new Currency('BTC', 0, 'BitCoin', -1);
     }
 

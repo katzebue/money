@@ -10,9 +10,11 @@ use Brick\Money\Currency;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
+use InvalidArgumentException;
 
 /**
  * Automatically adjusts the scale of a number to the strict minimum.
+ * @see \Brick\Money\Tests\Context\AutoContextTest
  */
 final class AutoContext implements Context
 {
@@ -22,7 +24,7 @@ final class AutoContext implements Context
     public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode) : BigDecimal
     {
         if ($roundingMode !== RoundingMode::UNNECESSARY) {
-            throw new \InvalidArgumentException('AutoContext only supports RoundingMode::UNNECESSARY');
+            throw new InvalidArgumentException('AutoContext only supports RoundingMode::UNNECESSARY');
         }
 
         return $amount->toBigDecimal()->stripTrailingZeros();

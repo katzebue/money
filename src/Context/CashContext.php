@@ -13,6 +13,7 @@ use Brick\Math\RoundingMode;
 
 /**
  * Adjusts a number to the default scale for the currency, respecting a cash rounding.
+ * @see \Brick\Money\Tests\Context\CashContextTest
  */
 final readonly class CashContext implements Context
 {

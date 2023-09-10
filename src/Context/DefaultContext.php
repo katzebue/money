@@ -13,6 +13,7 @@ use Brick\Math\RoundingMode;
 
 /**
  * Adjusts a number to the default scale for the currency.
+ * @see \Brick\Money\Tests\Context\DefaultContextTest
  */
 final class DefaultContext implements Context
 {

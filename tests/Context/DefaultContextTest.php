@@ -11,15 +11,15 @@ use Brick\Money\Currency;
 use Brick\Money\Tests\AbstractTestCase;
 
 use Brick\Math\BigNumber;
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for class DefaultContext.
  */
-class DefaultContextTest extends AbstractTestCase
+final class DefaultContextTest extends AbstractTestCase
 {
-    /**
-     * @dataProvider providerApplyTo
-     */
+    #[DataProvider('providerApplyTo')]
     public function testApplyTo(string $amount, string $currency, RoundingMode $roundingMode, string $expected) : void
     {
         $amount = BigNumber::of($amount);
@@ -38,19 +38,17 @@ class DefaultContextTest extends AbstractTestCase
         }
     }
 
-    public static function providerApplyTo() : array
+    public static function providerApplyTo(): Iterator
     {
-        return [
-            ['1', 'USD', RoundingMode::UNNECESSARY, '1.00'],
-            ['1.001', 'USD', RoundingMode::UNNECESSARY, RoundingNecessaryException::class],
-            ['1.001', 'USD', RoundingMode::DOWN, '1.00'],
-            ['1.001', 'USD', RoundingMode::UP, '1.01'],
-            ['1', 'JPY', RoundingMode::UNNECESSARY, '1'],
-            ['1.00', 'JPY', RoundingMode::UNNECESSARY, '1'],
-            ['1.01', 'JPY', RoundingMode::UNNECESSARY, RoundingNecessaryException::class],
-            ['1.01', 'JPY', RoundingMode::DOWN, '1'],
-            ['1.01', 'JPY', RoundingMode::UP, '2']
-        ];
+        yield ['1', 'USD', RoundingMode::UNNECESSARY, '1.00'];
+        yield ['1.001', 'USD', RoundingMode::UNNECESSARY, RoundingNecessaryException::class];
+        yield ['1.001', 'USD', RoundingMode::DOWN, '1.00'];
+        yield ['1.001', 'USD', RoundingMode::UP, '1.01'];
+        yield ['1', 'JPY', RoundingMode::UNNECESSARY, '1'];
+        yield ['1.00', 'JPY', RoundingMode::UNNECESSARY, '1'];
+        yield ['1.01', 'JPY', RoundingMode::UNNECESSARY, RoundingNecessaryException::class];
+        yield ['1.01', 'JPY', RoundingMode::DOWN, '1'];
+        yield ['1.01', 'JPY', RoundingMode::UP, '2'];
     }
 
     public function testGetStep() : void

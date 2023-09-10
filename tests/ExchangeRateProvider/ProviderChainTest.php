@@ -9,11 +9,12 @@ use Brick\Money\ExchangeRateProvider;
 use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
 use Brick\Money\ExchangeRateProvider\ProviderChain;
 use Brick\Money\Tests\AbstractTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 /**
  * Tests for class ProviderChain.
  */
-class ProviderChainTest extends AbstractTestCase
+final class ProviderChainTest extends AbstractTestCase
 {
     private static ExchangeRateProvider $provider1;
 
@@ -53,9 +54,7 @@ class ProviderChainTest extends AbstractTestCase
         return $provider;
     }
 
-    /**
-     * @depends testAddFirstProvider
-     */
+    #[Depends('testAddFirstProvider')]
     public function testAddSecondProvider(ProviderChain $provider) : ProviderChain
     {
         $provider->addExchangeRateProvider(self::$provider2);
@@ -67,9 +66,7 @@ class ProviderChainTest extends AbstractTestCase
         return $provider;
     }
 
-    /**
-     * @depends testAddSecondProvider
-     */
+    #[Depends('testAddSecondProvider')]
     public function testRemoveProvider(ProviderChain $provider) : void
     {
         $provider->removeExchangeRateProvider(self::$provider1);

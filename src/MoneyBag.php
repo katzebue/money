@@ -10,6 +10,7 @@ use Brick\Math\BigRational;
  * Container for monies in different currencies.
  *
  * This class is mutable.
+ * @see \Brick\Money\Tests\MoneyBagTest
  */
 final class MoneyBag implements MoneyContainer
 {

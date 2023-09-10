@@ -10,6 +10,7 @@ use Brick\Money\ExchangeRateProvider;
 
 /**
  * A chain of exchange rate providers.
+ * @see \Brick\Money\Tests\ExchangeRateProvider\ProviderChainTest
  */
 final class ProviderChain implements ExchangeRateProvider
 {

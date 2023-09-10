@@ -11,7 +11,7 @@ use Brick\Money\ExchangeRateProvider;
 /**
  * A mock implementation of ExchangeRateProvider for tests.
  */
-class ProviderMock implements ExchangeRateProvider
+final class ProviderMock implements ExchangeRateProvider
 {
     /**
      * @var array<string, array<string, float>>

@@ -15,6 +15,7 @@ use Brick\Money\Exception\CurrencyConversionException;
  * Note that the comparison is always performed by converting the first Money into the currency of the second Money.
  * This order is important because some exchange rate providers may only have one-way rates,
  * or may use a different rate in each direction.
+ * @see \Brick\Money\Tests\MoneyComparatorTest
  */
 final readonly class MoneyComparator
 {

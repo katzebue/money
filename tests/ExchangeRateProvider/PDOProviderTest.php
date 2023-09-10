@@ -9,73 +9,74 @@ use Brick\Money\ExchangeRateProvider\PDOProvider;
 use Brick\Money\ExchangeRateProvider\PDOProviderConfiguration;
 use Brick\Money\Tests\AbstractTestCase;
 use Closure;
+use InvalidArgumentException;
+use Iterator;
+use PDO;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for class PDOProvider.
  *
  * @requires extension pdo_sqlite
  */
-class PDOProviderTest extends AbstractTestCase
+final class PDOProviderTest extends AbstractTestCase
 {
     /**
-     * @dataProvider providerConstructorWithInvalidConfiguration
-     *
      * @param Closure(): PDOProviderConfiguration $getConfiguration
      */
+    #[DataProvider('providerConstructorWithInvalidConfiguration')]
     public function testConfigurationConstructorThrows(Closure $getConfiguration, string $exceptionMessage) : void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMessage);
 
         $getConfiguration();
     }
 
-    public static function providerConstructorWithInvalidConfiguration() : array
+    public static function providerConstructorWithInvalidConfiguration(): Iterator
     {
-        return [
-            [fn () => new PDOProviderConfiguration(
-                tableName: 'exchange_rate',
-                exchangeRateColumnName: 'exchange_rate',
-                targetCurrencyCode: 'EUR',
-            ), 'Invalid configuration: one of $sourceCurrencyCode or $sourceCurrencyColumnName must be set.'],
-            [fn () => new PDOProviderConfiguration(
-                tableName: 'exchange_rate',
-                exchangeRateColumnName: 'exchange_rate',
-                sourceCurrencyCode: 'EUR',
-                sourceCurrencyColumnName: 'source_currency_code',
-                targetCurrencyCode: 'EUR',
-            ), 'Invalid configuration: $sourceCurrencyCode and $sourceCurrencyColumnName cannot be both set.'],
-            [fn () => new PDOProviderConfiguration(
-                tableName: 'exchange_rate',
-                exchangeRateColumnName: 'exchange_rate',
-                sourceCurrencyCode: 'EUR',
-            ), 'Invalid configuration: one of $targetCurrencyCode or $targetCurrencyColumnName must be set.'],
-            [fn () => new PDOProviderConfiguration(
-                tableName: 'exchange_rate',
-                exchangeRateColumnName: 'exchange_rate',
-                sourceCurrencyCode: 'EUR',
-                targetCurrencyCode: 'EUR',
-                targetCurrencyColumnName: 'target_currency_code',
-            ), 'Invalid configuration: $targetCurrencyCode and $targetCurrencyColumnName cannot be both set.'],
-            [fn () => new PDOProviderConfiguration(
-                tableName: 'exchange_rate',
-                exchangeRateColumnName: 'exchange_rate',
-                sourceCurrencyCode: 'EUR',
-                targetCurrencyCode: 'EUR',
-            ), 'Invalid configuration: $sourceCurrencyCode and $targetCurrencyCode cannot be both set.'],
-        ];
+        yield [fn () => new PDOProviderConfiguration(
+            tableName: 'exchange_rate',
+            exchangeRateColumnName: 'exchange_rate',
+            targetCurrencyCode: 'EUR',
+        ), 'Invalid configuration: one of $sourceCurrencyCode or $sourceCurrencyColumnName must be set.'];
+        yield [fn () => new PDOProviderConfiguration(
+            tableName: 'exchange_rate',
+            exchangeRateColumnName: 'exchange_rate',
+            sourceCurrencyCode: 'EUR',
+            sourceCurrencyColumnName: 'source_currency_code',
+            targetCurrencyCode: 'EUR',
+        ), 'Invalid configuration: $sourceCurrencyCode and $sourceCurrencyColumnName cannot be both set.'];
+        yield [fn () => new PDOProviderConfiguration(
+            tableName: 'exchange_rate',
+            exchangeRateColumnName: 'exchange_rate',
+            sourceCurrencyCode: 'EUR',
+        ), 'Invalid configuration: one of $targetCurrencyCode or $targetCurrencyColumnName must be set.'];
+        yield [fn () => new PDOProviderConfiguration(
+            tableName: 'exchange_rate',
+            exchangeRateColumnName: 'exchange_rate',
+            sourceCurrencyCode: 'EUR',
+            targetCurrencyCode: 'EUR',
+            targetCurrencyColumnName: 'target_currency_code',
+        ), 'Invalid configuration: $targetCurrencyCode and $targetCurrencyColumnName cannot be both set.'];
+        yield [fn () => new PDOProviderConfiguration(
+            tableName: 'exchange_rate',
+            exchangeRateColumnName: 'exchange_rate',
+            sourceCurrencyCode: 'EUR',
+            targetCurrencyCode: 'EUR',
+        ), 'Invalid configuration: $sourceCurrencyCode and $targetCurrencyCode cannot be both set.'];
     }
 
     /**
-     * @dataProvider providerGetExchangeRate
      *
      * @param string       $sourceCurrencyCode The code of the source currency.
      * @param string       $targetCurrencyCode The code of the target currency.
      * @param float|string $expectedResult     The expected exchange rate, or an exception class if expected.
      */
+    #[DataProvider('providerGetExchangeRate')]
     public function testGetExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode, float|string $expectedResult) : void
     {
-        $pdo = new \PDO('sqlite::memory:');
+        $pdo = new PDO('sqlite::memory:');
 
         $pdo->query('
             CREATE TABLE exchange_rate (
@@ -111,27 +112,25 @@ class PDOProviderTest extends AbstractTestCase
         }
     }
 
-    public static function providerGetExchangeRate() : array
+    public static function providerGetExchangeRate(): Iterator
     {
-        return [
-            ['USD', 'EUR', 0.9],
-            ['EUR', 'USD', 1.1],
-            ['USD', 'CAD', 1.2],
-            ['CAD', 'USD', CurrencyConversionException::class],
-            ['EUR', 'CAD', CurrencyConversionException::class],
-        ];
+        yield ['USD', 'EUR', 0.9];
+        yield ['EUR', 'USD', 1.1];
+        yield ['USD', 'CAD', 1.2];
+        yield ['CAD', 'USD', CurrencyConversionException::class];
+        yield ['EUR', 'CAD', CurrencyConversionException::class];
     }
 
     /**
-     * @dataProvider providerWithFixedSourceCurrency
      *
      * @param string       $sourceCurrencyCode The code of the source currency.
      * @param string       $targetCurrencyCode The code of the target currency.
      * @param float|string $expectedResult     The expected exchange rate, or an exception class if expected.
      */
+    #[DataProvider('providerWithFixedSourceCurrency')]
     public function testWithFixedSourceCurrency(string $sourceCurrencyCode, string $targetCurrencyCode, float|string $expectedResult) : void
     {
-        $pdo = new \PDO('sqlite::memory:');
+        $pdo = new PDO('sqlite::memory:');
 
         $pdo->query('
             CREATE TABLE exchange_rate (
@@ -165,27 +164,25 @@ class PDOProviderTest extends AbstractTestCase
         }
     }
 
-    public static function providerWithFixedSourceCurrency() : array
+    public static function providerWithFixedSourceCurrency(): Iterator
     {
-        return [
-            ['EUR', 'USD', 1.1],
-            ['EUR', 'CAD', 1.2],
-            ['EUR', 'GBP', CurrencyConversionException::class],
-            ['USD', 'EUR', CurrencyConversionException::class],
-            ['CAD', 'EUR', CurrencyConversionException::class],
-        ];
+        yield ['EUR', 'USD', 1.1];
+        yield ['EUR', 'CAD', 1.2];
+        yield ['EUR', 'GBP', CurrencyConversionException::class];
+        yield ['USD', 'EUR', CurrencyConversionException::class];
+        yield ['CAD', 'EUR', CurrencyConversionException::class];
     }
 
     /**
-     * @dataProvider providerWithFixedTargetCurrency
      *
      * @param string       $sourceCurrencyCode The code of the source currency.
      * @param string       $targetCurrencyCode The code of the target currency.
      * @param float|string $expectedResult     The expected exchange rate, or an exception class if expected.
      */
+    #[DataProvider('providerWithFixedTargetCurrency')]
     public function testWithFixedTargetCurrency(string $sourceCurrencyCode, string $targetCurrencyCode, float|string $expectedResult) : void
     {
-        $pdo = new \PDO('sqlite::memory:');
+        $pdo = new PDO('sqlite::memory:');
 
         $pdo->query('
             CREATE TABLE exchange_rate (
@@ -219,28 +216,26 @@ class PDOProviderTest extends AbstractTestCase
         }
     }
 
-    public static function providerWithFixedTargetCurrency() : array
+    public static function providerWithFixedTargetCurrency(): Iterator
     {
-        return [
-            ['USD', 'EUR', 0.9],
-            ['CAD', 'EUR', 0.8],
-            ['GBP', 'EUR', CurrencyConversionException::class],
-            ['EUR', 'USD', CurrencyConversionException::class],
-            ['EUR', 'CAD', CurrencyConversionException::class],
-        ];
+        yield ['USD', 'EUR', 0.9];
+        yield ['CAD', 'EUR', 0.8];
+        yield ['GBP', 'EUR', CurrencyConversionException::class];
+        yield ['EUR', 'USD', CurrencyConversionException::class];
+        yield ['EUR', 'CAD', CurrencyConversionException::class];
     }
 
     /**
-     * @dataProvider providerWithParameters
      *
      * @param string       $sourceCurrencyCode The code of the source currency.
      * @param string       $targetCurrencyCode The code of the target currency.
      * @param array        $parameters         The parameters to resolve the extra query placeholders.
      * @param float|string $expectedResult     The expected exchange rate, or an exception class if expected.
      */
+    #[DataProvider('providerWithParameters')]
     public function testWithParameters(string $sourceCurrencyCode, string $targetCurrencyCode, array $parameters, float|string $expectedResult) : void
     {
-        $pdo = new \PDO('sqlite::memory:');
+        $pdo = new PDO('sqlite::memory:');
 
         $pdo->query('
             CREATE TABLE exchange_rate (
@@ -281,17 +276,15 @@ class PDOProviderTest extends AbstractTestCase
         }
     }
 
-    public static function providerWithParameters() : array
+    public static function providerWithParameters(): Iterator
     {
-        return [
-            ['EUR', 'USD', [2017, 8], 1.1],
-            ['EUR', 'CAD', [2017, 8], 1.2],
-            ['EUR', 'GBP', [2017, 8], CurrencyConversionException::class],
-            ['EUR', 'USD', [2017, 9], 1.15],
-            ['EUR', 'CAD', [2017, 9], 1.25],
-            ['EUR', 'GBP', [2017, 9], CurrencyConversionException::class],
-            ['EUR', 'USD', [2017, 10], CurrencyConversionException::class],
-            ['EUR', 'CAD', [2017, 10], CurrencyConversionException::class],
-        ];
+        yield ['EUR', 'USD', [2017, 8], 1.1];
+        yield ['EUR', 'CAD', [2017, 8], 1.2];
+        yield ['EUR', 'GBP', [2017, 8], CurrencyConversionException::class];
+        yield ['EUR', 'USD', [2017, 9], 1.15];
+        yield ['EUR', 'CAD', [2017, 9], 1.25];
+        yield ['EUR', 'GBP', [2017, 9], CurrencyConversionException::class];
+        yield ['EUR', 'USD', [2017, 10], CurrencyConversionException::class];
+        yield ['EUR', 'CAD', [2017, 10], CurrencyConversionException::class];
     }
 }

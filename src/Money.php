@@ -17,6 +17,7 @@ use Brick\Math\Exception\MathException;
 use Brick\Math\Exception\NumberFormatException;
 use Brick\Math\Exception\RoundingNecessaryException;
 use InvalidArgumentException;
+use NumberFormatter;
 
 /**
  * A monetary value in a given currency. This class is immutable.
@@ -30,6 +31,7 @@ use InvalidArgumentException;
  * - CashContext is similar to DefaultContext, but supports a cash rounding step.
  * - CustomContext handles monies with a custom scale, and optionally step.
  * - AutoContext automatically adjusts the scale of the money to the minimum required.
+ * @see \Brick\Money\Tests\MoneyTest
  */
 final class Money extends AbstractMoney
 {
@@ -737,11 +739,11 @@ final class Money extends AbstractMoney
      * Note that NumberFormatter internally represents values using floating point arithmetic,
      * so discrepancies can appear when formatting very large monetary values.
      *
-     * @param \NumberFormatter $formatter The formatter to format with.
+     * @param NumberFormatter $formatter The formatter to format with.
      *
      * @return string
      */
-    public function formatWith(\NumberFormatter $formatter) : string
+    public function formatWith(NumberFormatter $formatter) : string
     {
         return $formatter->formatCurrency(
             $this->amount->toFloat(),
@@ -762,7 +764,7 @@ final class Money extends AbstractMoney
      */
     public function formatTo(string $locale, bool $allowWholeNumber = false) : string
     {
-        /** @var \NumberFormatter|null $lastFormatter */
+        /** @var NumberFormatter|null $lastFormatter */
         static $lastFormatter = null;
         static $lastFormatterLocale;
         static $lastFormatterScale;
@@ -777,16 +779,16 @@ final class Money extends AbstractMoney
             $formatter = $lastFormatter;
 
             if ($lastFormatterScale !== $scale) {
-                $formatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $scale);
-                $formatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, $scale);
+                $formatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $scale);
+                $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $scale);
 
                 $lastFormatterScale = $scale;
             }
         } else {
-            $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+            $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
 
-            $formatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $scale);
-            $formatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, $scale);
+            $formatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $scale);
+            $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $scale);
 
             $lastFormatter = $formatter;
             $lastFormatterLocale = $locale;

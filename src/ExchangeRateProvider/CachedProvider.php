@@ -9,6 +9,7 @@ use Brick\Money\ExchangeRateProvider;
 
 /**
  * Caches the results of another exchange rate provider.
+ * @see \Brick\Money\Tests\ExchangeRateProvider\CachedProviderTest
  */
 final class CachedProvider implements ExchangeRateProvider
 {

@@ -11,6 +11,7 @@ use Brick\Math\BigNumber;
 
 /**
  * A configurable exchange rate provider.
+ * @see \Brick\Money\Tests\ExchangeRateProvider\ConfigurableProviderTest
  */
 final class ConfigurableProvider implements ExchangeRateProvider
 {

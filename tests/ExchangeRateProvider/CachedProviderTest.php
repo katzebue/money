@@ -11,7 +11,7 @@ use Brick\Money\Tests\AbstractTestCase;
 /**
  * Tests for class CachedProvider.
  */
-class CachedProviderTest extends AbstractTestCase
+final class CachedProviderTest extends AbstractTestCase
 {
     public function testGetExchangeRateAndInvalidate() : void
     {

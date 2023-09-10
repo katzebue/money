@@ -12,6 +12,7 @@ use Brick\Money\Currency;
 
 /**
  * Adjusts a number to a custom scale, and optionally step.
+ * @see \Brick\Money\Tests\Context\CustomContextTest
  */
 final readonly class CustomContext implements Context
 {

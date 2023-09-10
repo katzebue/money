@@ -12,15 +12,16 @@ use Brick\Money\Currency;
 use Brick\Money\Tests\AbstractTestCase;
 
 use Brick\Math\BigNumber;
+use InvalidArgumentException;
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for class AutoContext.
  */
-class AutoContextTest extends AbstractTestCase
+final class AutoContextTest extends AbstractTestCase
 {
-    /**
-     * @dataProvider providerApplyTo
-     */
+    #[DataProvider('providerApplyTo')]
     public function testApplyTo(string $amount, string $currency, RoundingMode $roundingMode, string $expected) : void
     {
         $amount = BigNumber::of($amount);
@@ -39,15 +40,13 @@ class AutoContextTest extends AbstractTestCase
         }
     }
 
-    public static function providerApplyTo() : array
+    public static function providerApplyTo(): Iterator
     {
-        return [
-            ['1', 'USD', RoundingMode::UNNECESSARY, '1'],
-            ['1.23', 'JPY', RoundingMode::UNNECESSARY, '1.23'],
-            ['123/5000', 'EUR', RoundingMode::UNNECESSARY, '0.0246'],
-            ['5/7', 'EUR', RoundingMode::UNNECESSARY, RoundingNecessaryException::class],
-            ['5/7', 'EUR', RoundingMode::DOWN, \InvalidArgumentException::class]
-        ];
+        yield ['1', 'USD', RoundingMode::UNNECESSARY, '1'];
+        yield ['1.23', 'JPY', RoundingMode::UNNECESSARY, '1.23'];
+        yield ['123/5000', 'EUR', RoundingMode::UNNECESSARY, '0.0246'];
+        yield ['5/7', 'EUR', RoundingMode::UNNECESSARY, RoundingNecessaryException::class];
+        yield ['5/7', 'EUR', RoundingMode::DOWN, InvalidArgumentException::class];
     }
 
     public function testGetStep() : void

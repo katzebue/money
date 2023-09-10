@@ -9,11 +9,13 @@ use Brick\Money\Exception\CurrencyConversionException;
 use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
 use Brick\Money\Money;
 use Brick\Money\MoneyComparator;
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for class MoneyComparator.
  */
-class MoneyComparatorTest extends AbstractTestCase
+final class MoneyComparatorTest extends AbstractTestCase
 {
     private function getExchangeRateProvider() : ConfigurableProvider
     {
@@ -32,12 +34,12 @@ class MoneyComparatorTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider providerCompare
      *
      * @param array      $a   The money to compare.
      * @param array      $b   The money to compare to.
      * @param int|string $cmp The expected comparison value, or an exception class.
      */
+    #[DataProvider('providerCompare')]
     public function testCompare(array $a, array $b, int|string $cmp) : void
     {
         $comparator = new MoneyComparator($this->getExchangeRateProvider());
@@ -57,40 +59,32 @@ class MoneyComparatorTest extends AbstractTestCase
         self::assertSame($cmp === 0, $comparator->isEqual($a, $b));
     }
 
-    public static function providerCompare() : array
+    public static function providerCompare(): Iterator
     {
-        return [
-            [['1.00', 'EUR'], ['1', 'EUR'], 0],
-
-            [['1.00', 'EUR'], ['1.09', 'USD'], 1],
-            [['1.00', 'EUR'], ['1.10', 'USD'], 0],
-            [['1.00', 'EUR'], ['1.11', 'USD'], -1],
-
-            [['1.11', 'USD'], ['1.00', 'EUR'], -1],
-            [['1.12', 'USD'], ['1.00', 'EUR'], 1],
-
-            [['123.57', 'USD'], ['123.57', 'BSD'], 0],
-            [['123.57', 'BSD'], ['123.57', 'USD'], 0],
-
-            [['1000250.123456', 'EUR', new AutoContext()], ['800200.0987648', 'GBP', new AutoContext()], 0],
-            [['1000250.123456', 'EUR', new AutoContext()], ['800200.098764', 'GBP', new AutoContext()], 1],
-            [['1000250.123456', 'EUR', new AutoContext()], ['800200.098765', 'GBP', new AutoContext()], -1],
-
-            [['800200.098764', 'GBP', new AutoContext()], ['1000250.123456', 'EUR', new AutoContext()], -1],
-            [['800200.098764', 'GBP', new AutoContext()], ['960240.1185168000', 'EUR', new AutoContext()], 0],
-            [['800200.098764', 'GBP', new AutoContext()], ['960240.118516', 'EUR', new AutoContext()], 1],
-            [['800200.098764', 'GBP', new AutoContext()], ['960240.118517', 'EUR', new AutoContext()], -1],
-
-            [['1.0', 'EUR'], ['1.0', 'BSD'], CurrencyConversionException::class],
-        ];
+        yield [['1.00', 'EUR'], ['1', 'EUR'], 0];
+        yield [['1.00', 'EUR'], ['1.09', 'USD'], 1];
+        yield [['1.00', 'EUR'], ['1.10', 'USD'], 0];
+        yield [['1.00', 'EUR'], ['1.11', 'USD'], -1];
+        yield [['1.11', 'USD'], ['1.00', 'EUR'], -1];
+        yield [['1.12', 'USD'], ['1.00', 'EUR'], 1];
+        yield [['123.57', 'USD'], ['123.57', 'BSD'], 0];
+        yield [['123.57', 'BSD'], ['123.57', 'USD'], 0];
+        yield [['1000250.123456', 'EUR', new AutoContext()], ['800200.0987648', 'GBP', new AutoContext()], 0];
+        yield [['1000250.123456', 'EUR', new AutoContext()], ['800200.098764', 'GBP', new AutoContext()], 1];
+        yield [['1000250.123456', 'EUR', new AutoContext()], ['800200.098765', 'GBP', new AutoContext()], -1];
+        yield [['800200.098764', 'GBP', new AutoContext()], ['1000250.123456', 'EUR', new AutoContext()], -1];
+        yield [['800200.098764', 'GBP', new AutoContext()], ['960240.1185168000', 'EUR', new AutoContext()], 0];
+        yield [['800200.098764', 'GBP', new AutoContext()], ['960240.118516', 'EUR', new AutoContext()], 1];
+        yield [['800200.098764', 'GBP', new AutoContext()], ['960240.118517', 'EUR', new AutoContext()], -1];
+        yield [['1.0', 'EUR'], ['1.0', 'BSD'], CurrencyConversionException::class];
     }
 
     /**
-     * @dataProvider providerMin
      *
      * @param array  $monies      The monies to compare.
      * @param string $expectedMin The expected minimum money, or an exception class.
      */
+    #[DataProvider('providerMin')]
     public function testMin(array $monies, string $expectedMin) : void
     {
         $comparator = new MoneyComparator($this->getExchangeRateProvider());
@@ -111,24 +105,22 @@ class MoneyComparatorTest extends AbstractTestCase
         }
     }
 
-    public static function providerMin() : array
+    public static function providerMin(): Iterator
     {
-        return [
-            [[['1.00', 'EUR'], ['1.09', 'USD']], 'USD 1.09'],
-            [[['1.00', 'EUR'], ['1.10', 'USD']], 'EUR 1.00'],
-            [[['1.00', 'EUR'], ['1.11', 'USD']], 'EUR 1.00'],
-            [[['1.00', 'EUR'], ['1.09', 'USD'], ['1.20', 'BSD']], 'USD 1.09'],
-            [[['1.00', 'EUR'], ['1.12', 'USD'], ['1.20', 'BSD']], CurrencyConversionException::class],
-            [[['1.05', 'EUR'], ['1.00', 'GBP'], ['1.19', 'EUR']], 'EUR 1.05'],
-        ];
+        yield [[['1.00', 'EUR'], ['1.09', 'USD']], 'USD 1.09'];
+        yield [[['1.00', 'EUR'], ['1.10', 'USD']], 'EUR 1.00'];
+        yield [[['1.00', 'EUR'], ['1.11', 'USD']], 'EUR 1.00'];
+        yield [[['1.00', 'EUR'], ['1.09', 'USD'], ['1.20', 'BSD']], 'USD 1.09'];
+        yield [[['1.00', 'EUR'], ['1.12', 'USD'], ['1.20', 'BSD']], CurrencyConversionException::class];
+        yield [[['1.05', 'EUR'], ['1.00', 'GBP'], ['1.19', 'EUR']], 'EUR 1.05'];
     }
 
     /**
-     * @dataProvider providerMax
      *
      * @param array  $monies      The monies to compare.
      * @param string $expectedMin The expected maximum money, or an exception class.
      */
+    #[DataProvider('providerMax')]
     public function testMax(array $monies, string $expectedMin) : void
     {
         $comparator = new MoneyComparator($this->getExchangeRateProvider());
@@ -149,17 +141,15 @@ class MoneyComparatorTest extends AbstractTestCase
         }
     }
 
-    public static function providerMax() : array
+    public static function providerMax(): Iterator
     {
-        return [
-            [[['1.00', 'EUR'], ['1.09', 'USD']], 'EUR 1.00'],
-            [[['1.00', 'EUR'], ['1.10', 'USD']], 'EUR 1.00'],
-            [[['1.00', 'EUR'], ['1.11', 'USD']], 'USD 1.11'],
-            [[['1.00', 'EUR'], ['1.09', 'USD'], ['1.20', 'BSD']], CurrencyConversionException::class],
-            [[['1.00', 'EUR'], ['1.22', 'USD'], ['1.20', 'BSD']], 'USD 1.22'],
-            [[['1.00', 'EUR'], ['1.12', 'USD'], ['1.20', 'BSD']], 'BSD 1.20'],
-            [[['1.05', 'EUR'], ['1.00', 'GBP'], ['1.19', 'EUR']], 'GBP 1.00'],
-            [[['1.05', 'EUR'], ['1.00', 'GBP'], ['1.2001', 'EUR', new AutoContext()]], 'EUR 1.2001'],
-        ];
+        yield [[['1.00', 'EUR'], ['1.09', 'USD']], 'EUR 1.00'];
+        yield [[['1.00', 'EUR'], ['1.10', 'USD']], 'EUR 1.00'];
+        yield [[['1.00', 'EUR'], ['1.11', 'USD']], 'USD 1.11'];
+        yield [[['1.00', 'EUR'], ['1.09', 'USD'], ['1.20', 'BSD']], CurrencyConversionException::class];
+        yield [[['1.00', 'EUR'], ['1.22', 'USD'], ['1.20', 'BSD']], 'USD 1.22'];
+        yield [[['1.00', 'EUR'], ['1.12', 'USD'], ['1.20', 'BSD']], 'BSD 1.20'];
+        yield [[['1.05', 'EUR'], ['1.00', 'GBP'], ['1.19', 'EUR']], 'GBP 1.00'];
+        yield [[['1.05', 'EUR'], ['1.00', 'GBP'], ['1.2001', 'EUR', new AutoContext()]], 'EUR 1.2001'];
     }
 }

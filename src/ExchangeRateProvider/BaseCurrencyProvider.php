@@ -17,6 +17,7 @@ use Brick\Math\BigRational;
  * For example, if your source only has exchange rates from USD to EUR and USD to GBP,
  * using this provider on top of it would allow you to get an exchange rate from EUR to USD, GBP to USD,
  * or even EUR to GBP and GBP to EUR.
+ * @see \Brick\Money\Tests\ExchangeRateProvider\BaseCurrencyProviderTest
  */
 final readonly class BaseCurrencyProvider implements ExchangeRateProvider
 {

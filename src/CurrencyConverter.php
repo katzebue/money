@@ -13,6 +13,7 @@ use Brick\Math\RoundingMode;
 
 /**
  * Converts monies into different currencies, using an exchange rate provider.
+ * @see \Brick\Money\Tests\CurrencyConverterTest
  */
 final readonly class CurrencyConverter
 {

@@ -8,6 +8,7 @@ use Brick\Money\Exception\UnknownCurrencyException;
 
 /**
  * Provides ISO 4217 currencies.
+ * @see \Brick\Money\Tests\ISOCurrencyProviderTest
  */
 final class ISOCurrencyProvider
 {

@@ -11,11 +11,13 @@ use Brick\Money\Tests\AbstractTestCase;
 
 use Brick\Math\BigRational;
 use Brick\Math\RoundingMode;
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for class ConfigurableProvider.
  */
-class ConfigurableProviderTest extends AbstractTestCase
+final class ConfigurableProviderTest extends AbstractTestCase
 {
     private function getExchangeRateProvider() : ExchangeRateProvider
     {
@@ -29,25 +31,23 @@ class ConfigurableProviderTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider providerGetExchangeRate
      *
      * @param string $sourceCurrencyCode The code of the source currency.
      * @param string $targetCurrencyCode The code of the target currency.
      * @param string $exchangeRate       The expected exchange rate, rounded DOWN to 3 decimals.
      */
+    #[DataProvider('providerGetExchangeRate')]
     public function testGetExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode, string $exchangeRate) : void
     {
         $rate = $this->getExchangeRateProvider()->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
         self::assertSame($exchangeRate, (string) BigRational::of($rate)->toScale(3, RoundingMode::DOWN));
     }
 
-    public static function providerGetExchangeRate() : array
+    public static function providerGetExchangeRate(): Iterator
     {
-        return [
-            ['USD', 'EUR', '0.800'],
-            ['USD', 'GBP', '0.600'],
-            ['USD', 'CAD', '1.200'],
-        ];
+        yield ['USD', 'EUR', '0.800'];
+        yield ['USD', 'GBP', '0.600'];
+        yield ['USD', 'CAD', '1.200'];
     }
 
     public function testUnknownCurrencyPair() : void

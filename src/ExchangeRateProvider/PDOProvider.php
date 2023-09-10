@@ -7,16 +7,20 @@ namespace Brick\Money\ExchangeRateProvider;
 use Brick\Math\BigNumber;
 use Brick\Money\ExchangeRateProvider;
 use Brick\Money\Exception\CurrencyConversionException;
+use InvalidArgumentException;
+use PDO;
+use PDOStatement;
 
 /**
  * Reads exchange rates from a PDO database connection.
+ * @see \Brick\Money\Tests\ExchangeRateProvider\PDOProviderTest
  */
 final class PDOProvider implements ExchangeRateProvider
 {
     /**
      * The SELECT statement.
      */
-    private readonly \PDOStatement $statement;
+    private readonly PDOStatement $statement;
 
     /**
      * The source currency code if fixed, or null if dynamic.
@@ -35,9 +39,9 @@ final class PDOProvider implements ExchangeRateProvider
 
     /**
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function __construct(\PDO $pdo, PDOProviderConfiguration $configuration)
+    public function __construct(PDO $pdo, PDOProviderConfiguration $configuration)
     {
         $conditions = [];
 
