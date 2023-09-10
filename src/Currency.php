@@ -6,13 +6,14 @@ namespace Brick\Money;
 
 use Brick\Money\Exception\UnknownCurrencyException;
 use InvalidArgumentException;
+use JsonSerializable;
 use Stringable;
 
 /**
  * A currency. This class is immutable.
  * @see \Brick\Money\Tests\CurrencyTest
  */
-final class Currency implements Stringable
+final class Currency implements Stringable, JsonSerializable
 {
     /**
      * The default number of fraction digits (typical scale) used with this currency.
@@ -162,6 +163,11 @@ final class Currency implements Stringable
      * Returns the currency code.
      */
     public function __toString() : string
+    {
+        return $this->currencyCode;
+    }
+
+    public function jsonSerialize(): string
     {
         return $this->currencyCode;
     }
