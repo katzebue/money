@@ -1,11 +1,10 @@
 name: CI
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 env:
   PSALM_PHP_VERSION: "8.2"
+  PSALM_DIR: "tools/psalm"
   COVERAGE_PHP_VERSION: "8.2"
 
 jobs:
@@ -15,18 +14,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.PSALM_PHP_VERSION }}
 
-      - name: Install composer dependencies
-        uses: "ramsey/composer-install@v1"
+      - uses: "ramsey/composer-install@v2"
+        with:
+          working-directory: ${{ env.PSALM_DIR }}
 
       - name: Run Psalm
-        run: vendor/bin/psalm --show-info=false --find-unused-psalm-suppress --no-progress
+        run: ${{ env.PSALM_DIR }}/vendor/bin/psalm --show-info=false --find-unused-psalm-suppress --no-progress
 
   phpunit:
     name: PHPUnit
@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -54,7 +54,7 @@ jobs:
           coverage: pcov
 
       - name: Install composer dependencies
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@v2"
         with:
           dependency-versions: ${{ matrix.deps }}
 
