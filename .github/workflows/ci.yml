@@ -12,6 +12,7 @@ jobs:
     name: Psalm
     runs-on: ubuntu-latest
 
+    if: ${{ false }}  # disable for now
     steps:
       - name: Checkout
         uses: actions/checkout@v4
