@@ -17,7 +17,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 final class MoneyComparatorTest extends AbstractTestCase
 {
-    private function getExchangeRateProvider() : ConfigurableProvider
+    private function getExchangeRateProvider(): ConfigurableProvider
     {
         $provider = new ConfigurableProvider();
 
@@ -40,7 +40,7 @@ final class MoneyComparatorTest extends AbstractTestCase
      * @param int|string $cmp The expected comparison value, or an exception class.
      */
     #[DataProvider('providerCompare')]
-    public function testCompare(array $a, array $b, int|string $cmp) : void
+    public function testCompare(array $a, array $b, int|string $cmp): void
     {
         $comparator = new MoneyComparator($this->getExchangeRateProvider());
 
@@ -85,7 +85,7 @@ final class MoneyComparatorTest extends AbstractTestCase
      * @param string $expectedMin The expected minimum money, or an exception class.
      */
     #[DataProvider('providerMin')]
-    public function testMin(array $monies, string $expectedMin) : void
+    public function testMin(array $monies, string $expectedMin): void
     {
         $comparator = new MoneyComparator($this->getExchangeRateProvider());
 
@@ -121,7 +121,7 @@ final class MoneyComparatorTest extends AbstractTestCase
      * @param string $expectedMin The expected maximum money, or an exception class.
      */
     #[DataProvider('providerMax')]
-    public function testMax(array $monies, string $expectedMin) : void
+    public function testMax(array $monies, string $expectedMin): void
     {
         $comparator = new MoneyComparator($this->getExchangeRateProvider());
 

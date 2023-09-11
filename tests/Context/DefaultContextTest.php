@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Brick\Money\Tests\Context;
 
+use Brick\Math\BigNumber;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
 use Brick\Money\Context\DefaultContext;
 use Brick\Money\Currency;
 use Brick\Money\Tests\AbstractTestCase;
-
-use Brick\Math\BigNumber;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -20,7 +19,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 final class DefaultContextTest extends AbstractTestCase
 {
     #[DataProvider('providerApplyTo')]
-    public function testApplyTo(string $amount, string $currency, RoundingMode $roundingMode, string $expected) : void
+    public function testApplyTo(string $amount, string $currency, RoundingMode $roundingMode, string $expected): void
     {
         $amount = BigNumber::of($amount);
         $currency = Currency::of($currency);
@@ -51,7 +50,7 @@ final class DefaultContextTest extends AbstractTestCase
         yield ['1.01', 'JPY', RoundingMode::UP, '2'];
     }
 
-    public function testGetStep() : void
+    public function testGetStep(): void
     {
         $context = new DefaultContext();
         self::assertSame(1, $context->getStep());

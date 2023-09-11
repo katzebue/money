@@ -32,7 +32,7 @@ final class MoneyBag implements MoneyContainer
      *
      * @return BigRational
      */
-    public function getAmount(Currency|string|int $currency) : BigRational
+    public function getAmount(Currency|string|int $currency): BigRational
     {
         if (is_int($currency)) {
             $currencyCode = Currency::of($currency)->__toString();
@@ -50,7 +50,7 @@ final class MoneyBag implements MoneyContainer
      *
      * @return BigRational[]
      */
-    public function getAmounts() : array
+    public function getAmounts(): array
     {
         return $this->amounts;
     }
@@ -62,7 +62,7 @@ final class MoneyBag implements MoneyContainer
      *
      * @return MoneyBag This instance.
      */
-    public function add(MoneyContainer $money) : MoneyBag
+    public function add(MoneyContainer $money): MoneyBag
     {
         foreach ($money->getAmounts() as $currencyCode => $amount) {
             $this->amounts[$currencyCode] = $this->getAmount($currencyCode)->plus($amount);
@@ -78,7 +78,7 @@ final class MoneyBag implements MoneyContainer
      *
      * @return MoneyBag This instance.
      */
-    public function subtract(MoneyContainer $money) : MoneyBag
+    public function subtract(MoneyContainer $money): MoneyBag
     {
         foreach ($money->getAmounts() as $currencyCode => $amount) {
             $this->amounts[$currencyCode] = $this->getAmount($currencyCode)->minus($amount);

@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Brick\Money\Tests;
 
+use Brick\Math\BigRational;
+use Brick\Math\Exception\RoundingNecessaryException;
+use Brick\Math\RoundingMode;
 use Brick\Money\Context;
-use Brick\Money\Context\CashContext;
-use Brick\Money\Context\DefaultContext;
 use Brick\Money\Context\AutoContext;
+use Brick\Money\Context\CashContext;
 use Brick\Money\Context\CustomContext;
+use Brick\Money\Context\DefaultContext;
 use Brick\Money\Currency;
 use Brick\Money\Exception\MoneyMismatchException;
 use Brick\Money\Money;
 use Brick\Money\RationalMoney;
-
-use Brick\Math\BigRational;
-use Brick\Math\Exception\RoundingNecessaryException;
-use Brick\Math\RoundingMode;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -25,7 +24,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 final class RationalMoneyTest extends AbstractTestCase
 {
-    public function testGetters() : void
+    public function testGetters(): void
     {
         $amount = BigRational::of('123/456');
         $currency = Currency::of('EUR');
@@ -37,7 +36,7 @@ final class RationalMoneyTest extends AbstractTestCase
     }
 
     #[DataProvider('providerPlus')]
-    public function testPlus(array $rationalMoney, mixed $amount, string $expected) : void
+    public function testPlus(array $rationalMoney, mixed $amount, string $expected): void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
 
@@ -64,7 +63,7 @@ final class RationalMoneyTest extends AbstractTestCase
     }
 
     #[DataProvider('providerMinus')]
-    public function testMinus(array $rationalMoney, mixed $amount, string $expected) : void
+    public function testMinus(array $rationalMoney, mixed $amount, string $expected): void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
 
@@ -91,7 +90,7 @@ final class RationalMoneyTest extends AbstractTestCase
     }
 
     #[DataProvider('providerMultipliedBy')]
-    public function testMultipliedBy(array $rationalMoney, mixed $operand, string $expected) : void
+    public function testMultipliedBy(array $rationalMoney, mixed $operand, string $expected): void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
 
@@ -114,7 +113,7 @@ final class RationalMoneyTest extends AbstractTestCase
     }
 
     #[DataProvider('providerDividedBy')]
-    public function testDividedBy(array $rationalMoney, mixed $operand, string $expected) : void
+    public function testDividedBy(array $rationalMoney, mixed $operand, string $expected): void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
 
@@ -138,7 +137,7 @@ final class RationalMoneyTest extends AbstractTestCase
     }
 
     #[DataProvider('providerSimplified')]
-    public function testSimplified(array $rationalMoney, string $expected) : void
+    public function testSimplified(array $rationalMoney, string $expected): void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
 
@@ -155,7 +154,7 @@ final class RationalMoneyTest extends AbstractTestCase
     }
 
     #[DataProvider('providerTo')]
-    public function testTo(array $rationalMoney, Context $context, RoundingMode $roundingMode, string $expected) : void
+    public function testTo(array $rationalMoney, Context $context, RoundingMode $roundingMode, string $expected): void
     {
         $rationalMoney = RationalMoney::of(...$rationalMoney);
 

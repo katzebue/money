@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Brick\Money\Tests\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
+use Brick\Math\RoundingMode;
 use Brick\Money\ExchangeRateProvider;
 use Brick\Money\ExchangeRateProvider\BaseCurrencyProvider;
 use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
 use Brick\Money\Tests\AbstractTestCase;
-
-use Brick\Math\BigRational;
-use Brick\Math\RoundingMode;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -20,7 +18,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 final class BaseCurrencyProviderTest extends AbstractTestCase
 {
-    private function getExchangeRateProvider() : ExchangeRateProvider
+    private function getExchangeRateProvider(): ExchangeRateProvider
     {
         $provider = new ConfigurableProvider();
 
@@ -38,7 +36,7 @@ final class BaseCurrencyProviderTest extends AbstractTestCase
      * @param string $exchangeRate       The expected exchange rate, rounded DOWN to 6 decimals.
      */
     #[DataProvider('providerGetExchangeRate')]
-    public function testGetExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode, string $exchangeRate) : void
+    public function testGetExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode, string $exchangeRate): void
     {
         $rate = $this->getExchangeRateProvider()->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
         self::assertSame($exchangeRate, (string) $rate->toScale(6, RoundingMode::DOWN));
@@ -61,7 +59,7 @@ final class BaseCurrencyProviderTest extends AbstractTestCase
     }
 
     #[DataProvider('providerReturnBigNumber')]
-    public function testReturnBigNumber(BigNumber|float|int|string $rate) : void
+    public function testReturnBigNumber(BigNumber|float|int|string $rate): void
     {
         $configurableProvider = new ConfigurableProvider();
         $configurableProvider->setExchangeRate('USD', 'EUR', $rate);

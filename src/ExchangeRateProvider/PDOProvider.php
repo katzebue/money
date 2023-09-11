@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Brick\Money\ExchangeRateProvider;
 
-use Brick\Math\BigNumber;
-use Brick\Money\ExchangeRateProvider;
 use Brick\Money\Exception\CurrencyConversionException;
+use Brick\Money\ExchangeRateProvider;
 use InvalidArgumentException;
 use PDO;
 use PDOStatement;
@@ -67,7 +66,7 @@ final class PDOProvider implements ExchangeRateProvider
         $this->sourceCurrencyCode = $sourceCurrencyCode;
         $this->targetCurrencyCode = $targetCurrencyCode;
 
-        $conditions = implode(' AND ' , $conditions);
+        $conditions = implode(' AND ', $conditions);
 
         $query = sprintf(
             'SELECT %s FROM %s WHERE %s',
@@ -85,7 +84,7 @@ final class PDOProvider implements ExchangeRateProvider
      * This is used in conjunction with $whereConditions in the configuration class.
      * The number of parameters passed to this method must match the number of placeholders.
      */
-    public function setParameters(mixed ...$parameters) : void
+    public function setParameters(mixed ...$parameters): void
     {
         $this->parameters = $parameters;
     }

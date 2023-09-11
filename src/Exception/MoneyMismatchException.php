@@ -15,7 +15,7 @@ class MoneyMismatchException extends MoneyException
      *
      * @return MoneyMismatchException
      */
-    public static function currencyMismatch(Currency $expected, Currency $actual) : self
+    public static function currencyMismatch(Currency $expected, Currency $actual): self
     {
         return new self(sprintf(
             'The monies do not share the same currency: expected %s, got %s.',
@@ -27,7 +27,7 @@ class MoneyMismatchException extends MoneyException
     /**
      * @return MoneyMismatchException
      */
-    public static function contextMismatch(string $method) : self
+    public static function contextMismatch(string $method): self
     {
         return new self(sprintf(
             'The monies do not share the same context. ' .

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Money;
 
-use Brick\Money\Context\DefaultContext;
-use Brick\Money\Exception\CurrencyConversionException;
-
 use Brick\Math\BigRational;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
+use Brick\Money\Context\DefaultContext;
+use Brick\Money\Exception\CurrencyConversionException;
 
 /**
  * Converts monies into different currencies, using an exchange rate provider.
@@ -25,8 +24,7 @@ final readonly class CurrencyConverter
          * The exchange rate provider.
          */
         private ExchangeRateProvider $exchangeRateProvider
-    )
-    {
+    ) {
     }
 
     /**
@@ -47,7 +45,7 @@ final readonly class CurrencyConverter
         Currency|string|int $currency,
         ?Context $context = null,
         RoundingMode $roundingMode = RoundingMode::UNNECESSARY,
-    ) : Money {
+    ): Money {
         return $this
             ->convertToRational($moneyContainer, $currency)
             ->to($context ?? new DefaultContext(), $roundingMode);
@@ -63,7 +61,7 @@ final readonly class CurrencyConverter
      *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function convertToRational(MoneyContainer $moneyContainer, Currency|string|int $currency) : RationalMoney
+    public function convertToRational(MoneyContainer $moneyContainer, Currency|string|int $currency): RationalMoney
     {
         if (! $currency instanceof Currency) {
             $currency = Currency::of($currency);

@@ -23,7 +23,7 @@ final class ISOCurrencyProviderTest extends AbstractTestCase
      * another class internally resolving an ISO currency code using ISOCurrencyProvider, and this can originate from
      * code outside test methods (for example in data providers).
      */
-    public static function setUpBeforeClass() : void
+    public static function setUpBeforeClass(): void
     {
         $reflection = new ReflectionProperty(ISOCurrencyProvider::class, 'instance');
         $reflection->setAccessible(true);
@@ -31,7 +31,7 @@ final class ISOCurrencyProviderTest extends AbstractTestCase
     }
 
     #[DataProvider('providerGetCurrency')]
-    public function testGetCurrency(string $currencyCode, int $numericCode, string $name, int $defaultFractionDigits) : void
+    public function testGetCurrency(string $currencyCode, int $numericCode, string $name, int $defaultFractionDigits): void
     {
         $provider = ISOCurrencyProvider::getInstance();
 
@@ -57,7 +57,7 @@ final class ISOCurrencyProviderTest extends AbstractTestCase
     }
 
     #[DataProvider('providerUnknownCurrency')]
-    public function testGetUnknownCurrency(string|int $currencyCode) : void
+    public function testGetUnknownCurrency(string|int $currencyCode): void
     {
         $this->expectException(UnknownCurrencyException::class);
         ISOCurrencyProvider::getInstance()->getCurrency($currencyCode);
@@ -69,7 +69,7 @@ final class ISOCurrencyProviderTest extends AbstractTestCase
         yield [-1];
     }
 
-    public function testGetAvailableCurrencies() : void
+    public function testGetAvailableCurrencies(): void
     {
         $provider = ISOCurrencyProvider::getInstance();
 

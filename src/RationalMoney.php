@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Brick\Money;
 
-use Brick\Money\Exception\MoneyMismatchException;
-
 use Brick\Math\BigNumber;
 use Brick\Math\BigRational;
 use Brick\Math\Exception\MathException;
+use Brick\Money\Exception\MoneyMismatchException;
 
 /**
  * An exact monetary amount, represented as a rational number. This class is immutable.
@@ -37,7 +36,7 @@ final class RationalMoney extends AbstractMoney
      *
      * @return RationalMoney
      */
-    public static function of(BigNumber|int|float|string $amount, Currency|string|int $currency) : RationalMoney
+    public static function of(BigNumber|int|float|string $amount, Currency|string|int $currency): RationalMoney
     {
         $amount = BigRational::of($amount);
 
@@ -51,7 +50,7 @@ final class RationalMoney extends AbstractMoney
     /**
      * @return BigRational
      */
-    public function getAmount() : BigRational
+    public function getAmount(): BigRational
     {
         return $this->amount;
     }
@@ -59,7 +58,7 @@ final class RationalMoney extends AbstractMoney
     /**
      * @return Currency
      */
-    public function getCurrency() : Currency
+    public function getCurrency(): Currency
     {
         return $this->currency;
     }
@@ -74,7 +73,7 @@ final class RationalMoney extends AbstractMoney
      * @throws MathException          If the argument is not a valid number.
      * @throws MoneyMismatchException If the argument is a money in another currency.
      */
-    public function plus(AbstractMoney|BigNumber|int|float|string $that) : RationalMoney
+    public function plus(AbstractMoney|BigNumber|int|float|string $that): RationalMoney
     {
         $that = $this->getAmountOf($that);
         $amount = $this->amount->plus($that);
@@ -92,7 +91,7 @@ final class RationalMoney extends AbstractMoney
      * @throws MathException          If the argument is not a valid number.
      * @throws MoneyMismatchException If the argument is a money in another currency.
      */
-    public function minus(AbstractMoney|BigNumber|int|float|string $that) : RationalMoney
+    public function minus(AbstractMoney|BigNumber|int|float|string $that): RationalMoney
     {
         $that = $this->getAmountOf($that);
         $amount = $this->amount->minus($that);
@@ -109,7 +108,7 @@ final class RationalMoney extends AbstractMoney
      *
      * @throws MathException If the argument is not a valid number.
      */
-    public function multipliedBy(BigNumber|int|float|string $that) : RationalMoney
+    public function multipliedBy(BigNumber|int|float|string $that): RationalMoney
     {
         $amount = $this->amount->multipliedBy($that);
 
@@ -125,7 +124,7 @@ final class RationalMoney extends AbstractMoney
      *
      * @throws MathException If the argument is not a valid number.
      */
-    public function dividedBy(BigNumber|int|float|string $that) : RationalMoney
+    public function dividedBy(BigNumber|int|float|string $that): RationalMoney
     {
         $amount = $this->amount->dividedBy($that);
 
@@ -137,12 +136,12 @@ final class RationalMoney extends AbstractMoney
      *
      * @return RationalMoney
      */
-    public function simplified() : RationalMoney
+    public function simplified(): RationalMoney
     {
         return new self($this->amount->simplified(), $this->currency);
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->currency . ' ' . $this->amount;
     }

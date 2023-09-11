@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Brick\Money\Tests;
 
+use Brick\Math\Exception\RoundingNecessaryException;
+use Brick\Math\RoundingMode;
 use Brick\Money\Context;
-use Brick\Money\Context\DefaultContext;
 use Brick\Money\Context\AutoContext;
 use Brick\Money\Context\CustomContext;
+use Brick\Money\Context\DefaultContext;
 use Brick\Money\CurrencyConverter;
 use Brick\Money\Exception\CurrencyConversionException;
 use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
 use Brick\Money\Money;
 use Brick\Money\MoneyBag;
-
-use Brick\Math\Exception\RoundingNecessaryException;
-use Brick\Math\RoundingMode;
 use Brick\Money\RationalMoney;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -25,7 +24,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 final class CurrencyConverterTest extends AbstractTestCase
 {
-    private function createCurrencyConverter() : CurrencyConverter
+    private function createCurrencyConverter(): CurrencyConverter
     {
         $exchangeRateProvider = new ConfigurableProvider();
         $exchangeRateProvider->setExchangeRate('EUR', 'USD', '1.1');
@@ -43,7 +42,7 @@ final class CurrencyConverterTest extends AbstractTestCase
      * @param string       $expectedResult The expected money's string representation, or an exception class name.
      */
     #[DataProvider('providerConvertMoney')]
-    public function testConvertMoney(array $money, string $toCurrency, RoundingMode $roundingMode, string $expectedResult) : void
+    public function testConvertMoney(array $money, string $toCurrency, RoundingMode $roundingMode, string $expectedResult): void
     {
         $money = Money::of(...$money);
         $currencyConverter = $this->createCurrencyConverter();
@@ -84,7 +83,7 @@ final class CurrencyConverterTest extends AbstractTestCase
      * @param string       $total        The expected total.
      */
     #[DataProvider('providerConvertMoneyBag')]
-    public function testConvertMoneyBag(array $monies, string $currency, Context $context, RoundingMode $roundingMode, string $total) : void
+    public function testConvertMoneyBag(array $monies, string $currency, Context $context, RoundingMode $roundingMode, string $total): void
     {
         $exchangeRateProvider = new ConfigurableProvider();
         $exchangeRateProvider->setExchangeRate('EUR', 'USD', '1.23456789');
@@ -116,7 +115,7 @@ final class CurrencyConverterTest extends AbstractTestCase
      * @param string $expectedTotal The expected total.
      */
     #[DataProvider('providerConvertMoneyBagToRational')]
-    public function testConvertMoneyBagToRational(array $monies, string $currency, string $expectedTotal) : void
+    public function testConvertMoneyBagToRational(array $monies, string $currency, string $expectedTotal): void
     {
         $exchangeRateProvider = new ConfigurableProvider();
         $exchangeRateProvider->setExchangeRate('EUR', 'USD', '1.123456789');
@@ -149,7 +148,7 @@ final class CurrencyConverterTest extends AbstractTestCase
      * @param string       $expectedResult The expected money's string representation, or an exception class name.
      */
     #[DataProvider('providerConvertRationalMoney')]
-    public function testConvertRationalMoney(array $money, string $toCurrency, RoundingMode $roundingMode, string $expectedResult) : void
+    public function testConvertRationalMoney(array $money, string $toCurrency, RoundingMode $roundingMode, string $expectedResult): void
     {
         $currencyConverter = $this->createCurrencyConverter();
 

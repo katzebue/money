@@ -18,5 +18,5 @@ interface MoneyContainer
      *
      * @return BigNumber[]
      */
-    public function getAmounts() : array;
+    public function getAmounts(): array;
 }

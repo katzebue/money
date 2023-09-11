@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Money\Context;
 
-use Brick\Money\Context;
-use Brick\Money\Currency;
-
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
+use Brick\Money\Context;
+use Brick\Money\Currency;
 
 /**
  * Adjusts a number to the default scale for the currency, respecting a cash rounding.
@@ -27,14 +26,13 @@ final readonly class CashContext implements Context
          * For example, step 5 on CHF would allow CHF 0.00, CHF 0.05, CHF 0.10, etc.
          */
         private int $step
-    )
-    {
+    ) {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode) : BigDecimal
+    public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode): BigDecimal
     {
         $scale = $currency->getDefaultFractionDigits();
 
@@ -52,7 +50,7 @@ final readonly class CashContext implements Context
     /**
      * {@inheritdoc}
      */
-    public function getStep() : int
+    public function getStep(): int
     {
         return $this->step;
     }
@@ -60,7 +58,7 @@ final readonly class CashContext implements Context
     /**
      * {@inheritdoc}
      */
-    public function isFixedScale() : bool
+    public function isFixedScale(): bool
     {
         return true;
     }

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Money;
 
-use Brick\Money\Exception\MoneyMismatchException;
-
 use Brick\Math\BigNumber;
-use Brick\Math\RoundingMode;
 use Brick\Math\Exception\MathException;
 use Brick\Math\Exception\RoundingNecessaryException;
+use Brick\Math\RoundingMode;
+use Brick\Money\Exception\MoneyMismatchException;
 use JsonSerializable;
 use Stringable;
 
@@ -21,9 +20,9 @@ use Stringable;
  */
 abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializable
 {
-    abstract public function getAmount() : BigNumber;
+    abstract public function getAmount(): BigNumber;
 
-    abstract public function getCurrency() : Currency;
+    abstract public function getCurrency(): Currency;
 
     /**
      * Converts this money to a Money in the given Context.
@@ -35,7 +34,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @throws RoundingNecessaryException If RoundingMode::UNNECESSARY is used but rounding is necessary.
      */
-    final public function to(Context $context, RoundingMode $roundingMode = RoundingMode::UNNECESSARY) : Money
+    final public function to(Context $context, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): Money
     {
         return Money::create($this->getAmount(), $this->getCurrency(), $context, $roundingMode);
     }
@@ -47,10 +46,10 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return BigNumber[]
      */
-    final public function getAmounts() : array
+    final public function getAmounts(): array
     {
         return [
-            $this->getCurrency()->getCurrencyCode() => $this->getAmount()
+            $this->getCurrency()->getCurrencyCode() => $this->getAmount(),
         ];
     }
 
@@ -59,7 +58,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return int -1 if the number is negative, 0 if zero, 1 if positive.
      */
-    final public function getSign() : int
+    final public function getSign(): int
     {
         return $this->getAmount()->getSign();
     }
@@ -69,7 +68,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return bool
      */
-    final public function isZero() : bool
+    final public function isZero(): bool
     {
         return $this->getAmount()->isZero();
     }
@@ -79,7 +78,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return bool
      */
-    final public function isNegative() : bool
+    final public function isNegative(): bool
     {
         return $this->getAmount()->isNegative();
     }
@@ -89,7 +88,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return bool
      */
-    final public function isNegativeOrZero() : bool
+    final public function isNegativeOrZero(): bool
     {
         return $this->getAmount()->isNegativeOrZero();
     }
@@ -99,7 +98,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return bool
      */
-    final public function isPositive() : bool
+    final public function isPositive(): bool
     {
         return $this->getAmount()->isPositive();
     }
@@ -109,7 +108,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return bool
      */
-    final public function isPositiveOrZero() : bool
+    final public function isPositiveOrZero(): bool
     {
         return $this->getAmount()->isPositiveOrZero();
     }
@@ -122,7 +121,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function compareTo(AbstractMoney|BigNumber|int|float|string $that) : int
+    final public function compareTo(AbstractMoney|BigNumber|int|float|string $that): int
     {
         return $this->getAmount()->compareTo($this->getAmountOf($that));
     }
@@ -133,7 +132,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isEqualTo(AbstractMoney|BigNumber|int|float|string $that) : bool
+    final public function isEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool
     {
         return $this->getAmount()->isEqualTo($this->getAmountOf($that));
     }
@@ -144,7 +143,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isLessThan(AbstractMoney|BigNumber|int|float|string $that) : bool
+    final public function isLessThan(AbstractMoney|BigNumber|int|float|string $that): bool
     {
         return $this->getAmount()->isLessThan($this->getAmountOf($that));
     }
@@ -155,7 +154,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isLessThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that) : bool
+    final public function isLessThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool
     {
         return $this->getAmount()->isLessThanOrEqualTo($this->getAmountOf($that));
     }
@@ -166,7 +165,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isGreaterThan(AbstractMoney|BigNumber|int|float|string $that) : bool
+    final public function isGreaterThan(AbstractMoney|BigNumber|int|float|string $that): bool
     {
         return $this->getAmount()->isGreaterThan($this->getAmountOf($that));
     }
@@ -177,7 +176,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isGreaterThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that) : bool
+    final public function isGreaterThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool
     {
         return $this->getAmount()->isGreaterThanOrEqualTo($this->getAmountOf($that));
     }
@@ -191,7 +190,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
      *
      * @return bool
      */
-    final public function isAmountAndCurrencyEqualTo(AbstractMoney $that) : bool
+    final public function isAmountAndCurrencyEqualTo(AbstractMoney $that): bool
     {
         return $this->getAmount()->isEqualTo($that->getAmount())
             && $this->getCurrency()->is($that->getCurrency());
@@ -223,7 +222,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
     {
         return [
             'amount' => (string) $this->getAmount(),
-            'currency' => (string) $this->getCurrency()
+            'currency' => (string) $this->getCurrency(),
         ];
     }
 }

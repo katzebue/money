@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Brick\Money\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
-use Brick\Money\ExchangeRateProvider;
-
 use Brick\Math\BigRational;
+use Brick\Money\ExchangeRateProvider;
 
 /**
  * Calculates exchange rates relative to a base currency.
@@ -34,8 +33,7 @@ final readonly class BaseCurrencyProvider implements ExchangeRateProvider
          * The code of the currency all the exchanges rates are based on.
          */
         private string $baseCurrencyCode
-    )
-    {
+    ) {
     }
 
     /**

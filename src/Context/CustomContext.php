@@ -31,14 +31,13 @@ final readonly class CustomContext implements Context
          * For example, scale=4 and step=5 would allow amounts of 0.0000, 0.0005, 0.0010, etc.
          */
         private int $step = 1
-    )
-    {
+    ) {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode) : BigDecimal
+    public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode): BigDecimal
     {
         if ($this->step === 1) {
             return $amount->toScale($this->scale, $roundingMode);
@@ -54,7 +53,7 @@ final readonly class CustomContext implements Context
     /**
      * {@inheritdoc}
      */
-    public function getStep() : int
+    public function getStep(): int
     {
         return $this->step;
     }
@@ -62,7 +61,7 @@ final readonly class CustomContext implements Context
     /**
      * {@inheritdoc}
      */
-    public function isFixedScale() : bool
+    public function isFixedScale(): bool
     {
         return true;
     }
@@ -72,7 +71,7 @@ final readonly class CustomContext implements Context
      *
      * @return int
      */
-    public function getScale() : int
+    public function getScale(): int
     {
         return $this->scale;
     }
