@@ -19,7 +19,6 @@
         "brick/varexporter": "~0.3.0",
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^10.3",
-        "rector/rector": "^0.18",
         "vimeo/psalm": "^5.15"
     },
     "suggest": {
