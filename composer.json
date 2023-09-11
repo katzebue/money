@@ -1,13 +1,13 @@
 {
     "name": "katzebue/money",
     "description": "Money and currency library",
+    "license": "MIT",
     "type": "library",
     "keywords": [
         "Brick",
         "Money",
         "Currency"
     ],
-    "license": "MIT",
     "require": {
         "php": "^8.2",
         "ext-json": "*",
@@ -17,8 +17,8 @@
         "ext-dom": "*",
         "ext-pdo": "*",
         "brick/varexporter": "^0.3",
-        "php-coveralls/php-coveralls": "^2.2",
         "guzzlehttp/guzzle": "^7.0",
+        "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^10.3.3"
     },
     "suggest": {
