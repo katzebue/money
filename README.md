@@ -4,10 +4,10 @@
 
 Fork of a money and currency library for PHP.
 
-[![Build Status](https://github.com/brick/money/workflows/CI/badge.svg)](https://github.com/brick/money/actions)
-[![Coverage Status](https://coveralls.io/repos/github/brick/money/badge.svg?branch=master)](https://coveralls.io/github/brick/money?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/brick/money/v/stable)](https://packagist.org/packages/brick/money)
-[![Total Downloads](https://poser.pugx.org/brick/money/downloads)](https://packagist.org/packages/brick/money)
+[![Build Status](https://github.com/katzebue/money/workflows/CI/badge.svg)](https://github.com/katzebue/money/actions)
+[![Coverage Status](https://coveralls.io/repos/github/katzebue/money/badge.svg?branch=main)](https://coveralls.io/github/katzebue/money?branch=main)
+[![Latest Stable Version](https://poser.pugx.org/katzebue/money/v/stable)](https://packagist.org/packages/katzebue/money)
+[![Total Downloads](https://poser.pugx.org/katzebue/money/downloads)](https://packagist.org/packages/katzebue/money)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 ## Introduction
@@ -21,7 +21,7 @@ This library is based on [brick/math](https://github.com/brick/math) and handles
 This library is installable via [Composer](https://getcomposer.org/):
 
 ```bash
-composer require brick/money
+composer require katzebue/money
 ```
 
 ### Requirements
@@ -297,7 +297,7 @@ $configuration = new PDOProviderConfiguration(
 $provider = new PDOProvider($pdo, $configuration);
 ```
 
-PDOProvider also supports fixed source or target currency, and dynamic `WHERE` conditions. Check the [PDOProviderConfiguration](https://github.com/brick/money/blob/0.8.0/src/ExchangeRateProvider/PDOProviderConfiguration.php) class for more information.
+PDOProvider also supports fixed source or target currency, and dynamic `WHERE` conditions. Check the [PDOProviderConfiguration](https://github.com/katzebue/money/blob/0.8.0/src/ExchangeRateProvider/PDOProviderConfiguration.php) class for more information.
 
 ### BaseCurrencyProvider
 
