@@ -12,7 +12,6 @@ jobs:
     name: Psalm
     runs-on: ubuntu-latest
 
-    if: ${{ false }}  # disable for now
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,12 +21,11 @@ jobs:
         with:
           php-version: ${{ env.PSALM_PHP_VERSION }}
 
-      - uses: "ramsey/composer-install@v2"
-        with:
-          working-directory: ${{ env.PSALM_DIR }}
+      - name: "Install dependencies with composer"
+        run: composer update --no-interaction --no-progress && composer i --working-dir=${{ env.PSALM_DIR }}
 
       - name: Run Psalm
-        run: ${{ env.PSALM_DIR }}/vendor/bin/psalm --show-info=false --find-unused-psalm-suppress --no-progress
+        run: ${{ env.PSALM_DIR }}/vendor/bin/psalm --threads=4 --show-info=false --find-unused-psalm-suppress --no-progress
 
   phpunit:
     name: PHPUnit
