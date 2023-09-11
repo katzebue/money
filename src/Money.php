@@ -108,7 +108,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
         $amount = BigNumber::of($amount);
 
-        return self::create($amount, $currency, $context, $roundingMode);
+        return static::create($amount, $currency, $context, $roundingMode);
     }
 
     /**
@@ -144,7 +144,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
         $amount = BigRational::of($minorAmount)->dividedBy(10 ** $currency->getDefaultFractionDigits());
 
-        return self::create($amount, $currency, $context, $roundingMode);
+        return static::create($amount, $currency, $context, $roundingMode);
     }
 
     public static function zero(Currency|string|int $currency, ?Context $context = null): static
@@ -159,7 +159,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
         $amount = BigDecimal::zero();
 
-        return self::create($amount, $currency, $context);
+        return static::create($amount, $currency, $context);
     }
 
     public function getAmount(): BigDecimal
@@ -201,7 +201,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
         $amount = $this->amount->toBigRational()->plus($amount);
 
-        return self::create($amount, $this->currency, $this->context, $roundingMode);
+        return static::create($amount, $this->currency, $this->context, $roundingMode);
     }
 
     public function minus(AbstractMoney|BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
@@ -218,21 +218,21 @@ class Money extends AbstractMoney implements MoneyInterface
 
         $amount = $this->amount->toBigRational()->minus($amount);
 
-        return self::create($amount, $this->currency, $this->context, $roundingMode);
+        return static::create($amount, $this->currency, $this->context, $roundingMode);
     }
 
     public function multipliedBy(BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
     {
         $amount = $this->amount->toBigRational()->multipliedBy($that);
 
-        return self::create($amount, $this->currency, $this->context, $roundingMode);
+        return static::create($amount, $this->currency, $this->context, $roundingMode);
     }
 
     public function dividedBy(BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
     {
         $amount = $this->amount->toBigRational()->dividedBy($that);
 
-        return self::create($amount, $this->currency, $this->context, $roundingMode);
+        return static::create($amount, $this->currency, $this->context, $roundingMode);
     }
 
     public function quotient(BigNumber|int|float|string $that): static
@@ -422,7 +422,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
         $amount = $this->amount->toBigRational()->multipliedBy($exchangeRate);
 
-        return self::create($amount, $currency, $context, $roundingMode);
+        return static::create($amount, $currency, $context, $roundingMode);
     }
 
     public function formatWith(NumberFormatter $formatter): string
