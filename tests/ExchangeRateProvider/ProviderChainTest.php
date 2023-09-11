@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests\ExchangeRateProvider;
+namespace Katzebue\Money\Tests\ExchangeRateProvider;
 
-use Brick\Money\Exception\CurrencyConversionException;
-use Brick\Money\ExchangeRateProvider;
-use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
-use Brick\Money\ExchangeRateProvider\ProviderChain;
-use Brick\Money\Tests\AbstractTestCase;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider;
+use Katzebue\Money\ExchangeRateProvider\ConfigurableProvider;
+use Katzebue\Money\ExchangeRateProvider\ProviderChain;
+use Katzebue\Money\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\Depends;
 
 /**

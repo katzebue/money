@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
-use Brick\Money\Currency;
-use Brick\Money\Exception\UnknownCurrencyException;
 use InvalidArgumentException;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Exception\UnknownCurrencyException;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 
 /**

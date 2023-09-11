@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Context;
+namespace Katzebue\Money\Context;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context;
-use Brick\Money\Currency;
+use Katzebue\Money\Context;
+use Katzebue\Money\Currency;
 
 /**
  * Adjusts a number to a custom scale, and optionally step.
- * @see \Brick\Money\Tests\Context\CustomContextTest
+ * @see \Katzebue\Money\Tests\Context\CustomContextTest
  */
 final readonly class CustomContext implements Context
 {

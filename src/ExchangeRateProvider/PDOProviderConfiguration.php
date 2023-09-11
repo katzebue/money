@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\ExchangeRateProvider;
+namespace Katzebue\Money\ExchangeRateProvider;
 
 use InvalidArgumentException;
 
@@ -74,7 +74,7 @@ final readonly class PDOProviderConfiguration
         }
 
         if ($targetCurrencyCode === null && $targetCurrencyColumnName === null) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Invalid configuration: one of $targetCurrencyCode or $targetCurrencyColumnName must be set.',
             );
         }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
-use Brick\Money\Context\AutoContext;
-use Brick\Money\Exception\CurrencyConversionException;
-use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
-use Brick\Money\Money;
-use Brick\Money\MoneyComparator;
 use Iterator;
+use Katzebue\Money\Context\AutoContext;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider\ConfigurableProvider;
+use Katzebue\Money\Money;
+use Katzebue\Money\MoneyComparator;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**

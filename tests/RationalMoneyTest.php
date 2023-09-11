@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
 use Brick\Math\BigRational;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context;
-use Brick\Money\Context\AutoContext;
-use Brick\Money\Context\CashContext;
-use Brick\Money\Context\CustomContext;
-use Brick\Money\Context\DefaultContext;
-use Brick\Money\Currency;
-use Brick\Money\Exception\MoneyMismatchException;
-use Brick\Money\Money;
-use Brick\Money\RationalMoney;
 use Iterator;
+use Katzebue\Money\Context;
+use Katzebue\Money\Context\AutoContext;
+use Katzebue\Money\Context\CashContext;
+use Katzebue\Money\Context\CustomContext;
+use Katzebue\Money\Context\DefaultContext;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Exception\MoneyMismatchException;
+use Katzebue\Money\Money;
+use Katzebue\Money\RationalMoney;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\BigRational;
-use Brick\Money\Context;
-use Brick\Money\Currency;
-use Brick\Money\Money;
-use Brick\Money\MoneyBag;
-use Brick\Money\RationalMoney;
+use Katzebue\Money\Context;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Money;
+use Katzebue\Money\MoneyBag;
+use Katzebue\Money\RationalMoney;
 use PHPUnit\Framework\TestCase;
 
 /**

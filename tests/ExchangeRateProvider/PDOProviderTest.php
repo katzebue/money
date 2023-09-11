@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests\ExchangeRateProvider;
+namespace Katzebue\Money\Tests\ExchangeRateProvider;
 
-use Brick\Money\Exception\CurrencyConversionException;
-use Brick\Money\ExchangeRateProvider\PDOProvider;
-use Brick\Money\ExchangeRateProvider\PDOProviderConfiguration;
-use Brick\Money\Tests\AbstractTestCase;
 use Closure;
 use InvalidArgumentException;
 use Iterator;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider\PDOProvider;
+use Katzebue\Money\ExchangeRateProvider\PDOProviderConfiguration;
+use Katzebue\Money\Tests\AbstractTestCase;
 use PDO;
 use PHPUnit\Framework\Attributes\DataProvider;
 

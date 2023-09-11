@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests\ExchangeRateProvider;
+namespace Katzebue\Money\Tests\ExchangeRateProvider;
 
-use Brick\Money\Exception\CurrencyConversionException;
-use Brick\Money\ExchangeRateProvider\CachedProvider;
-use Brick\Money\Tests\AbstractTestCase;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider\CachedProvider;
+use Katzebue\Money\Tests\AbstractTestCase;
 
 /**
  * Tests for class CachedProvider.

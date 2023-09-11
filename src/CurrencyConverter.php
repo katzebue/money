@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
 use Brick\Math\BigRational;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context\DefaultContext;
-use Brick\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\Context\DefaultContext;
+use Katzebue\Money\Exception\CurrencyConversionException;
 
 /**
  * Converts monies into different currencies, using an exchange rate provider.
- * @see \Brick\Money\Tests\CurrencyConverterTest
+ * @see \Katzebue\Money\Tests\CurrencyConverterTest
  */
 final readonly class CurrencyConverter
 {

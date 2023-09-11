@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\ExchangeRateProvider;
+namespace Katzebue\Money\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
 use Brick\Math\BigRational;
-use Brick\Money\ExchangeRateProvider;
+use Katzebue\Money\ExchangeRateProvider;
 
 /**
  * Calculates exchange rates relative to a base currency.
@@ -16,7 +16,7 @@ use Brick\Money\ExchangeRateProvider;
  * For example, if your source only has exchange rates from USD to EUR and USD to GBP,
  * using this provider on top of it would allow you to get an exchange rate from EUR to USD, GBP to USD,
  * or even EUR to GBP and GBP to EUR.
- * @see \Brick\Money\Tests\ExchangeRateProvider\BaseCurrencyProviderTest
+ * @see \Katzebue\Money\Tests\ExchangeRateProvider\BaseCurrencyProviderTest
  */
 final readonly class BaseCurrencyProvider implements ExchangeRateProvider
 {

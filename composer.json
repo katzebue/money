@@ -1,5 +1,5 @@
 {
-    "name": "brick/money",
+    "name": "katzebue/money",
     "description": "Money and currency library",
     "type": "library",
     "keywords": [
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Brick\\Money\\": "src/"
+            "Katzebue\\Money\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Brick\\Money\\Tests\\": "tests/"
+            "Katzebue\\Money\\Tests\\": "tests/"
         }
     },
     "config": {

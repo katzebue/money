@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
-use Brick\Money\Currency;
-use Brick\Money\Exception\UnknownCurrencyException;
-use Brick\Money\ISOCurrencyProvider;
 use Iterator;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Exception\UnknownCurrencyException;
+use Katzebue\Money\ISOCurrencyProvider;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionProperty;
 

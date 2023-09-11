@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\ExchangeRateProvider;
-
-use Brick\Money\ExchangeRateProvider;
-use Brick\Money\Exception\CurrencyConversionException;
+namespace Katzebue\Money\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider;
 
 /**
  * A configurable exchange rate provider.
- * @see \Brick\Money\Tests\ExchangeRateProvider\ConfigurableProviderTest
+ * @see \Katzebue\Money\Tests\ExchangeRateProvider\ConfigurableProviderTest
  */
 final class ConfigurableProvider implements ExchangeRateProvider
 {

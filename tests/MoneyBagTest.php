@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
-use Brick\Money\Context\AutoContext;
-use Brick\Money\Currency;
-use Brick\Money\Money;
-use Brick\Money\MoneyBag;
-use Brick\Money\RationalMoney;
+use Katzebue\Money\Context\AutoContext;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Money;
+use Katzebue\Money\MoneyBag;
+use Katzebue\Money\RationalMoney;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Depends;
 

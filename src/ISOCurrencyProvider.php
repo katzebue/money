@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
-use Brick\Money\Exception\UnknownCurrencyException;
+use Katzebue\Money\Exception\UnknownCurrencyException;
 
 /**
  * Provides ISO 4217 currencies.
- * @see \Brick\Money\Tests\ISOCurrencyProviderTest
+ * @see \Katzebue\Money\Tests\ISOCurrencyProviderTest
  */
 final class ISOCurrencyProvider
 {

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\ExchangeRateProvider;
+namespace Katzebue\Money\ExchangeRateProvider;
 
-use Brick\Money\Exception\CurrencyConversionException;
-use Brick\Money\ExchangeRateProvider;
 use InvalidArgumentException;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider;
 use PDO;
 use PDOStatement;
 
 /**
  * Reads exchange rates from a PDO database connection.
- * @see \Brick\Money\Tests\ExchangeRateProvider\PDOProviderTest
+ * @see \Katzebue\Money\Tests\ExchangeRateProvider\PDOProviderTest
  */
 final class PDOProvider implements ExchangeRateProvider
 {

@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/brick/brick/master/logo.png" alt="" align="left" height="64">
 
-A money and currency library for PHP.
+Fork of a money and currency library for PHP.
 
 [![Build Status](https://github.com/brick/money/workflows/CI/badge.svg)](https://github.com/brick/money/actions)
 [![Coverage Status](https://coveralls.io/repos/github/brick/money/badge.svg?branch=master)](https://coveralls.io/github/brick/money?branch=master)
@@ -28,21 +28,9 @@ composer require brick/money
 
 This library requires PHP 8.2 or later.
 
-For PHP 8.0 compatibility, you can use version `0.8`. For PHP 7.4, you can use version `0.7`. For PHP 7.1, 7.2 & 7.3, you can use version `0.5`. Note that [these PHP versions are EOL](http://php.net/supported-versions.php) and not supported anymore. If you're still using one of these PHP versions, you should consider upgrading as soon as possible.
+For PHP 8.1 and lower compatibility, you can use [original repo](https://github.com/brick/money).
 
 Although not required, it is recommended that you **install the [GMP](http://php.net/manual/en/book.gmp.php) or [BCMath](http://php.net/manual/en/book.bc.php) extension** to speed up calculations.
-
-### Project status & release process
-
-While this library is still under development, it is well tested and should be stable enough to use in production environments.
-
-The current releases are numbered `0.x.y`. When a non-breaking change is introduced (adding new methods, optimizing existing code, etc.), `y` is incremented.
-
-**When a breaking change is introduced, a new `0.x` version cycle is always started.**
-
-It is therefore safe to lock your project to a given release cycle, such as `0.8.*`.
-
-If you need to upgrade to a newer release cycle, check the [release history](https://github.com/brick/money/releases) for a list of changes introduced by each further `0.x.0` version.
 
 ## Creating a Money
 
@@ -457,9 +445,3 @@ If you're using an ORM such as Doctrine, it is advised to store the amount and c
       }
   }
   ```
-
-## FAQ
-
-> How does this project compare with [moneyphp/money](https://github.com/moneyphp/money)?
-
-Please see [this discussion](https://github.com/brick/money/issues/28).

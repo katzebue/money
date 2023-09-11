@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
 use Brick\Math\BigRational;
 
@@ -10,7 +10,7 @@ use Brick\Math\BigRational;
  * Container for monies in different currencies.
  *
  * This class is mutable.
- * @see \Brick\Money\Tests\MoneyBagTest
+ * @see \Katzebue\Money\Tests\MoneyBagTest
  */
 final class MoneyBag implements MoneyContainer
 {

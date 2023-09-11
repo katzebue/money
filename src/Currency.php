@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
-use Brick\Money\Exception\UnknownCurrencyException;
 use InvalidArgumentException;
 use JsonSerializable;
+use Katzebue\Money\Exception\UnknownCurrencyException;
 use Stringable;
 
 /**
  * A currency. This class is immutable.
- * @see \Brick\Money\Tests\CurrencyTest
+ * @see \Katzebue\Money\Tests\CurrencyTest
  */
 final class Currency implements Stringable, JsonSerializable
 {

@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
-
-use Brick\Money\Exception\CurrencyConversionException;
+namespace Katzebue\Money;
 
 use Brick\Math\BigNumber;
+use Katzebue\Money\Exception\CurrencyConversionException;
 
 /**
  * Interface for exchange rate providers.

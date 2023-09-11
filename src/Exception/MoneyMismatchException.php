@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Exception;
+namespace Katzebue\Money\Exception;
 
-use Brick\Money\Currency;
+use Katzebue\Money\Currency;
 
 /**
  * Exception thrown when a money is not in the expected currency or context.

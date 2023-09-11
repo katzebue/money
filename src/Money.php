@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
@@ -12,10 +12,10 @@ use Brick\Math\Exception\MathException;
 use Brick\Math\Exception\NumberFormatException;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context\DefaultContext;
-use Brick\Money\Exception\MoneyMismatchException;
-use Brick\Money\Exception\UnknownCurrencyException;
 use InvalidArgumentException;
+use Katzebue\Money\Context\DefaultContext;
+use Katzebue\Money\Exception\MoneyMismatchException;
+use Katzebue\Money\Exception\UnknownCurrencyException;
 use NumberFormatter;
 
 /**
@@ -30,7 +30,7 @@ use NumberFormatter;
  * - CashContext is similar to DefaultContext, but supports a cash rounding step.
  * - CustomContext handles monies with a custom scale, and optionally step.
  * - AutoContext automatically adjusts the scale of the money to the minimum required.
- * @see \Brick\Money\Tests\MoneyTest
+ * @see \Katzebue\Money\Tests\MoneyTest
  */
 final class Money extends AbstractMoney
 {

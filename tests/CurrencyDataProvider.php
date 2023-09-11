@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests;
+namespace Katzebue\Money\Tests;
 
-use Brick\Money\Exception\UnknownCurrencyException;
 use Iterator;
+use Katzebue\Money\Exception\UnknownCurrencyException;
 
 final class CurrencyDataProvider
 {

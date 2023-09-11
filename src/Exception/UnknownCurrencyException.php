@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Exception;
+namespace Katzebue\Money\Exception;
 
 /**
  * Exception thrown when attempting to create a Currency from an unknown currency code.

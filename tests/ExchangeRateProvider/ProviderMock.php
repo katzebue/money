@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests\ExchangeRateProvider;
+namespace Katzebue\Money\Tests\ExchangeRateProvider;
 
-use Brick\Money\Exception\CurrencyConversionException;
-use Brick\Money\ExchangeRateProvider;
+use Katzebue\Money\Exception\CurrencyConversionException;
+use Katzebue\Money\ExchangeRateProvider;
 
 /**
  * A mock implementation of ExchangeRateProvider for tests.

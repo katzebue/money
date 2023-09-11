@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\ExchangeRateProvider;
+namespace Katzebue\Money\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
-use Brick\Money\ExchangeRateProvider;
+use Katzebue\Money\ExchangeRateProvider;
 
 /**
  * Caches the results of another exchange rate provider.
- * @see \Brick\Money\Tests\ExchangeRateProvider\CachedProviderTest
+ * @see \Katzebue\Money\Tests\ExchangeRateProvider\CachedProviderTest
  */
 final class CachedProvider implements ExchangeRateProvider
 {

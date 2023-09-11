@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
 use Brick\Math\BigNumber;
 use Brick\Math\BigRational;
 use Brick\Math\Exception\MathException;
-use Brick\Money\Exception\MoneyMismatchException;
+use Katzebue\Money\Exception\MoneyMismatchException;
 
 /**
  * An exact monetary amount, represented as a rational number. This class is immutable.
  *
  * This is used to represent intermediate calculation results, and may not be exactly convertible to a decimal amount
  * with a finite number of digits. The final conversion to a Money may require rounding.
- * @see \Brick\Money\Tests\RationalMoneyTest
+ * @see \Katzebue\Money\Tests\RationalMoneyTest
  */
 final class RationalMoney extends AbstractMoney
 {

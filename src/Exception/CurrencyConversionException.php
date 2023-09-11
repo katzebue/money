@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Exception;
+namespace Katzebue\Money\Exception;
 
 /**
  * Exception thrown when an exchange rate is not available.

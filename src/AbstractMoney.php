@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
-use Brick\Money\Exception\MoneyMismatchException;
 use JsonSerializable;
+use Katzebue\Money\Exception\MoneyMismatchException;
 use Stringable;
 
 /**

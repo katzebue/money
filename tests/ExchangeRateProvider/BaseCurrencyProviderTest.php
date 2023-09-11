@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests\ExchangeRateProvider;
+namespace Katzebue\Money\Tests\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
-use Brick\Money\ExchangeRateProvider;
-use Brick\Money\ExchangeRateProvider\BaseCurrencyProvider;
-use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
-use Brick\Money\Tests\AbstractTestCase;
 use Iterator;
+use Katzebue\Money\ExchangeRateProvider;
+use Katzebue\Money\ExchangeRateProvider\BaseCurrencyProvider;
+use Katzebue\Money\ExchangeRateProvider\ConfigurableProvider;
+use Katzebue\Money\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**

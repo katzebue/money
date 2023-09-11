@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money\Tests\Context;
+namespace Katzebue\Money\Tests\Context;
 
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context\AutoContext;
-use Brick\Money\Context\CashContext;
-use Brick\Money\Currency;
-use Brick\Money\Tests\AbstractTestCase;
 use InvalidArgumentException;
 use Iterator;
+use Katzebue\Money\Context\AutoContext;
+use Katzebue\Money\Context\CashContext;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Tests\AbstractTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**

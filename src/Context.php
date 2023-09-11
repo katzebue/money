@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brick\Money;
+namespace Katzebue\Money;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
