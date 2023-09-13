@@ -22,7 +22,7 @@ use NumberFormatter;
  */
 class Money extends AbstractMoney implements MoneyInterface
 {
-    protected function __construct(
+    final protected function __construct(
         /**
          * The amount.
          */
