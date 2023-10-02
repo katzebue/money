@@ -38,7 +38,7 @@ class Money extends AbstractMoney implements MoneyInterface
     ) {
     }
 
-    public static function min(Money $money, Money ...$monies): static
+    public static function min(MoneyInterface $money, MoneyInterface ...$monies): static
     {
         $min = $money;
 
@@ -51,7 +51,7 @@ class Money extends AbstractMoney implements MoneyInterface
         return $min;
     }
 
-    public static function max(Money $money, Money ...$monies): static
+    public static function max(MoneyInterface $money, MoneyInterface ...$monies): static
     {
         $max = $money;
 
@@ -64,7 +64,7 @@ class Money extends AbstractMoney implements MoneyInterface
         return $max;
     }
 
-    public static function total(Money $money, Money ...$monies): static
+    public static function total(MoneyInterface $money, MoneyInterface ...$monies): static
     {
         $total = $money;
 
@@ -187,15 +187,15 @@ class Money extends AbstractMoney implements MoneyInterface
         return $this->context;
     }
 
-    public function plus(AbstractMoney|BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
+    public function plus(MoneyInterface|BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
     {
         $amount = $this->getAmountOf($that);
 
-        if ($that instanceof Money) {
+        if ($that instanceof MoneyInterface) {
             $this->checkContext($that->getContext(), __FUNCTION__);
 
             if ($this->context->isFixedScale()) {
-                return new static($this->amount->plus($that->amount), $this->currency, $this->context);
+                return new static($this->amount->plus($that->getAmount()), $this->currency, $this->context);
             }
         }
 
@@ -204,15 +204,15 @@ class Money extends AbstractMoney implements MoneyInterface
         return static::create($amount, $this->currency, $this->context, $roundingMode);
     }
 
-    public function minus(AbstractMoney|BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
+    public function minus(MoneyInterface|BigNumber|int|float|string $that, RoundingMode $roundingMode = RoundingMode::UNNECESSARY): static
     {
         $amount = $this->getAmountOf($that);
 
-        if ($that instanceof Money) {
+        if ($that instanceof MoneyInterface) {
             $this->checkContext($that->getContext(), __FUNCTION__);
 
             if ($this->context->isFixedScale()) {
-                return new static($this->amount->minus($that->amount), $this->currency, $this->context);
+                return new static($this->amount->minus($that->getAmount()), $this->currency, $this->context);
             }
         }
 

@@ -16,7 +16,7 @@
     "require-dev": {
         "ext-dom": "*",
         "ext-pdo": "*",
-        "brick/varexporter": "^0.3",
+        "brick/varexporter": "^0.4",
         "guzzlehttp/guzzle": "^7.0",
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^10.3.3"

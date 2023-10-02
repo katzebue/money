@@ -81,7 +81,7 @@ interface MoneyInterface
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    public function compareTo(AbstractMoney|BigNumber|int|float|string $that): int;
+    public function compareTo(MoneyInterface|BigNumber|int|float|string $that): int;
 
     /**
      * Returns whether this money is equal to the given amount.
@@ -89,7 +89,7 @@ interface MoneyInterface
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    public function isEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool;
+    public function isEqualTo(MoneyInterface|BigNumber|int|float|string $that): bool;
 
     /**
      * Returns whether this money is less than the given amount.
@@ -97,7 +97,7 @@ interface MoneyInterface
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    public function isLessThan(AbstractMoney|BigNumber|int|float|string $that): bool;
+    public function isLessThan(MoneyInterface|BigNumber|int|float|string $that): bool;
 
     /**
      * Returns whether this money is less than or equal to the given amount.
@@ -105,7 +105,7 @@ interface MoneyInterface
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    public function isLessThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool;
+    public function isLessThanOrEqualTo(MoneyInterface|BigNumber|int|float|string $that): bool;
 
     /**
      * Returns whether this money is greater than the given amount.
@@ -113,7 +113,7 @@ interface MoneyInterface
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    public function isGreaterThan(AbstractMoney|BigNumber|int|float|string $that): bool;
+    public function isGreaterThan(MoneyInterface|BigNumber|int|float|string $that): bool;
 
     /**
      * Returns whether this money is greater than or equal to the given amount.
@@ -121,7 +121,7 @@ interface MoneyInterface
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    public function isGreaterThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool;
+    public function isGreaterThanOrEqualTo(MoneyInterface|BigNumber|int|float|string $that): bool;
 
     /**
      * Returns whether this money's amount and currency are equal to those of the given money.
@@ -129,43 +129,43 @@ interface MoneyInterface
      * Unlike isEqualTo(), this method only accepts a money, and returns false if the given money is in another
      * currency, instead of throwing a MoneyMismatchException.
      */
-    public function isAmountAndCurrencyEqualTo(AbstractMoney $that): bool;
+    public function isAmountAndCurrencyEqualTo(MoneyInterface $that): bool;
 
     /**
      * Returns the minimum of the given monies.
      *
      * If several monies are equal to the minimum value, the first one is returned.
      *
-     * @param Money $money The first money.
-     * @param Money ...$monies The subsequent monies.
+     * @param MoneyInterface $money The first money.
+     * @param MoneyInterface ...$monies The subsequent monies.
      *
      * @throws MoneyMismatchException If all the monies are not in the same currency.
      */
-    public static function min(Money $money, Money ...$monies): static;
+    public static function min(MoneyInterface $money, MoneyInterface ...$monies): static;
 
     /**
      * Returns the maximum of the given monies.
      *
      * If several monies are equal to the maximum value, the first one is returned.
      *
-     * @param Money $money The first money.
-     * @param Money ...$monies The subsequent monies.
+     * @param MoneyInterface $money The first money.
+     * @param MoneyInterface ...$monies The subsequent monies.
      *
      * @throws MoneyMismatchException If all the monies are not in the same currency.
      */
-    public static function max(Money $money, Money ...$monies): static;
+    public static function max(MoneyInterface $money, MoneyInterface ...$monies): static;
 
     /**
      * Returns the total of the given monies.
      *
      * The monies must share the same currency and context.
      *
-     * @param Money $money The first money.
-     * @param Money ...$monies The subsequent monies.
+     * @param MoneyInterface $money The first money.
+     * @param MoneyInterface ...$monies The subsequent monies.
      *
      * @throws MoneyMismatchException If all the monies are not in the same currency and context.
      */
-    public static function total(Money $money, Money ...$monies): static;
+    public static function total(MoneyInterface $money, MoneyInterface ...$monies): static;
 
     /**
      * Returns a Money of the given amount and currency.
@@ -248,14 +248,14 @@ interface MoneyInterface
      * rounding mode can be provided. If a rounding mode is not provided and rounding is necessary, an exception is
      * thrown.
      *
-     * @param AbstractMoney|BigNumber|int|float|string $that The money or amount to add.
+     * @param MoneyInterface|BigNumber|int|float|string $that The money or amount to add.
      * @param RoundingMode $roundingMode An optional RoundingMode constant.
      *
      * @throws MathException          If the argument is an invalid number or rounding is necessary.
      * @throws MoneyMismatchException If the argument is a money in a different currency or in a different context.
      */
     public function plus(
-        AbstractMoney|BigNumber|int|float|string $that,
+        MoneyInterface|BigNumber|int|float|string $that,
         RoundingMode $roundingMode = RoundingMode::UNNECESSARY
     ): static;
 
@@ -270,14 +270,14 @@ interface MoneyInterface
      * rounding mode can be provided. If a rounding mode is not provided and rounding is necessary, an exception is
      * thrown.
      *
-     * @param AbstractMoney|BigNumber|int|float|string $that The money or amount to subtract.
+     * @param MoneyInterface|BigNumber|int|float|string $that The money or amount to subtract.
      * @param RoundingMode $roundingMode An optional RoundingMode constant.
      *
      * @throws MathException          If the argument is an invalid number or rounding is necessary.
      * @throws MoneyMismatchException If the argument is a money in a different currency or in a different context.
      */
     public function minus(
-        AbstractMoney|BigNumber|int|float|string $that,
+        MoneyInterface|BigNumber|int|float|string $that,
         RoundingMode $roundingMode = RoundingMode::UNNECESSARY
     ): static;
 
