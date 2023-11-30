@@ -1,6 +1,4 @@
-# Brick\Money
-
-<img src="https://raw.githubusercontent.com/brick/brick/master/logo.png" alt="" align="left" height="64">
+# Katzebue\Money
 
 Fork of a money and currency library for PHP.
 
@@ -37,7 +35,7 @@ Although not required, it is recommended that you **install the [GMP](http://php
 To create a Money, call the `of()` factory method:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $money = Money::of(50, 'USD'); // USD 50.00
 $money = Money::of('19.9', 'USD'); // USD 19.90
@@ -46,7 +44,7 @@ $money = Money::of('19.9', 'USD'); // USD 19.90
 Alternatively, you can create a Money from a number of "minor units" (cents), using the `ofMinor()` method:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $money = Money::ofMinor(1234, 'USD'); // USD 12.34
 ```
@@ -56,7 +54,7 @@ $money = Money::ofMinor(1234, 'USD'); // USD 12.34
 Money is an immutable class: its value never changes, so it can be safely passed around. All operations on a Money therefore return a new instance:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $money = Money::of(50, 'USD');
 
@@ -69,7 +67,7 @@ echo $money->dividedBy(4); // USD 12.50
 You can add and subtract Money instances as well:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $cost = Money::of(25, 'USD');
 $shipping = Money::of('4.99', 'USD');
@@ -81,7 +79,7 @@ echo $cost->plus($shipping)->minus($discount); // USD 27.49
 If the two Money instances are not of the same currency, an exception is thrown:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $a = Money::of(1, 'USD');
 $b = Money::of(1, 'EUR');
@@ -92,7 +90,7 @@ $a->plus($b); // MoneyMismatchException
 If the result needs rounding, a [rounding mode](http://brick.io/math/class-Brick.Math.RoundingMode.html) must be passed as second parameter, or an exception is thrown:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 use Brick\Math\RoundingMode;
 
 $money = Money::of(50, 'USD');
@@ -121,8 +119,8 @@ Some currencies do not allow the same increments for cash and cashless payments.
 You can deal with such monies using `CashContext`:
 
 ```php
-use Brick\Money\Money;
-use Brick\Money\Context\CashContext;
+use Katzebue\Money\Money;
+use Katzebue\Money\Context\CashContext;
 use Brick\Math\RoundingMode;
 
 $money = Money::of(10, 'CHF', new CashContext(5)); // CHF 10.00
@@ -135,8 +133,8 @@ $money->dividedBy(3, RoundingMode::UP); // CHF 3.35
 You can use custom scale monies by providing a `CustomContext`:
 
 ```php
-use Brick\Money\Money;
-use Brick\Money\Context\CustomContext;
+use Katzebue\Money\Money;
+use Katzebue\Money\Context\CustomContext;
 use Brick\Math\RoundingMode;
 
 $money = Money::of(10, 'USD', new CustomContext(4)); // USD 10.0000
@@ -148,8 +146,8 @@ $money->dividedBy(7, RoundingMode::UP); // USD 1.4286
 If you need monies that adjust their scale to fit the operation result, then `AutoContext` is for you:
 
 ```php
-use Brick\Money\Money;
-use Brick\Money\Context\AutoContext;
+use Katzebue\Money\Money;
+use Katzebue\Money\Context\AutoContext;
 
 $money = Money::of('1.10', 'USD', new AutoContext()); // USD 1.1
 $money->multipliedBy('2.5'); // USD 2.75
@@ -163,7 +161,7 @@ Note that it is not advised to use `AutoContext` to represent an intermediate ca
 You may occasionally need to chain several operations on a Money, and only apply a rounding mode on the very last step; if you applied a rounding mode on every single operation, you might end up with a different result. This is where `RationalMoney` comes into play. This class internally stores the amount as a rational number (a fraction). You can create a `RationalMoney` from a `Money`, and conversely:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 use Brick\Math\RoundingMode;
 
 $money = Money::of('9.5', 'EUR') // EUR 9.50
@@ -196,7 +194,7 @@ you can simplify the fraction at any time, without affecting the actual monetary
 You can easily split a Money into a number of parts:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $money = Money::of(100, 'USD');
 [$a, $b, $c] = $money->split(3); // USD 33.34, USD 33.33, USD 33.33
@@ -205,7 +203,7 @@ $money = Money::of(100, 'USD');
 You can also allocate a Money according to a list of ratios. Say you want to distribute a profit of 987.65 CHF to 3 shareholders, having shares of `48%`, `41%` and `11%` of a company:
 
 ```php
-use Brick\Money\Money;
+use Katzebue\Money\Money;
 
 $profit = Money::of('987.65', 'CHF');
 [$a, $b, $c] = $profit->allocate(48, 41, 11); // CHF 474.08, CHF 404.93, CHF 108.64
@@ -214,8 +212,8 @@ $profit = Money::of('987.65', 'CHF');
 It plays well with cash roundings, too:
 
 ```php
-use Brick\Money\Money;
-use Brick\Money\Context\CashContext;
+use Katzebue\Money\Money;
+use Katzebue\Money\Context\CashContext;
 
 $profit = Money::of('987.65', 'CHF', new CashContext(5));
 [$a, $b, $c] = $profit->allocate(48, 41, 11); // CHF 474.10, CHF 404.95, CHF 108.60
@@ -230,8 +228,8 @@ When the allocation yields a remainder, both `split()` and `allocate()` spread i
 You may sometimes need to add monies in different currencies together. `MoneyBag` comes in handy for this:
 
 ```php
-use Brick\Money\Money;
-use Brick\Money\MoneyBag;
+use Katzebue\Money\Money;
+use Katzebue\Money\MoneyBag;
 
 $eur = Money::of('12.34', 'EUR');
 $jpy = Money::of(123, 'JPY');
@@ -252,7 +250,7 @@ What can you do with a MoneyBag? Well, you can convert it to a Money in the curr
 This library ships with a `CurrencyConverter` that can convert any kind of money (`Money`, `RationalMoney` or `MoneyBag`) to a Money in another currency:
 
 ```php
-use Brick\Money\CurrencyConverter;
+use Katzebue\Money\CurrencyConverter;
 
 $exchangeRateProvider = ...;
 $converter = new CurrencyConverter($exchangeRateProvider); // optionally provide a Context here
@@ -270,7 +268,7 @@ To use the currency converter, you need an `ExchangeRateProvider`. Several imple
 This provider starts with a blank state, and allows you to add exchange rates manually:
 
 ```php
-use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
+use Katzebue\Money\ExchangeRateProvider\ConfigurableProvider;
 
 $provider = new ConfigurableProvider();
 $provider->setExchangeRate('EUR', 'USD', '1.0987');
@@ -282,8 +280,8 @@ $provider->setExchangeRate('USD', 'EUR', '0.9123');
 This provider reads exchange rates from a database table:
 
 ```php
-use Brick\Money\ExchangeRateProvider\PDOProvider;
-use Brick\Money\ExchangeRateProvider\PDOProviderConfiguration;
+use Katzebue\Money\ExchangeRateProvider\PDOProvider;
+use Katzebue\Money\ExchangeRateProvider\PDOProviderConfiguration;
 
 $pdo = new \PDO(...);
 
@@ -306,8 +304,8 @@ This provider builds on top of another exchange rate provider, for the quite com
 This provider will combine exchange rates to get the expected result:
 
 ```php
-use Brick\Money\ExchangeRateProvider\ConfigurableProvider;
-use Brick\Money\ExchangeRateProvider\BaseCurrencyProvider;
+use Katzebue\Money\ExchangeRateProvider\ConfigurableProvider;
+use Katzebue\Money\ExchangeRateProvider\BaseCurrencyProvider;
 
 $provider = new ConfigurableProvider();
 $provider->setExchangeRate('EUR', 'USD', '1.1');
@@ -330,8 +328,8 @@ Writing your own provider is easy: the `ExchangeRateProvider` interface has just
 Money supports ISO 4217 currencies by default. You can also use custom currencies by creating a `Currency` instance. Let's create a Bitcoin currency:
 
 ```php
-use Brick\Money\Currency;
-use Brick\Money\Money;
+use Katzebue\Money\Currency;
+use Katzebue\Money\Money;
 
 $bitcoin = new Currency(
     'XBT',     // currency code
