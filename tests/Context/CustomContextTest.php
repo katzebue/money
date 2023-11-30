@@ -32,7 +32,7 @@ final class CustomContextTest extends AbstractTestCase
 
         $actual = $context->applyTo($amount, $currency, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertBigDecimalIs($expected, $actual);
         }
     }

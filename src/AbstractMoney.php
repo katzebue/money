@@ -121,7 +121,7 @@ abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializ
     final protected function getAmountOf(MoneyInterface|AbstractMoney|BigNumber|int|float|string $that): BigNumber|int|float|string
     {
         if ($that instanceof MoneyInterface || $that instanceof AbstractMoney) {
-            if (! $that->getCurrency()->is($this->getCurrency())) {
+            if (!$that->getCurrency()->is($this->getCurrency())) {
                 throw MoneyMismatchException::currencyMismatch($this->getCurrency(), $that->getCurrency());
             }
 

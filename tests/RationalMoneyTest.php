@@ -46,7 +46,7 @@ final class RationalMoneyTest extends AbstractTestCase
 
         $actual = $rationalMoney->plus($amount);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertRationalMoneyEquals($expected, $actual);
         }
     }
@@ -73,7 +73,7 @@ final class RationalMoneyTest extends AbstractTestCase
 
         $actual = $rationalMoney->minus($amount);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertRationalMoneyEquals($expected, $actual);
         }
     }
@@ -100,7 +100,7 @@ final class RationalMoneyTest extends AbstractTestCase
 
         $actual = $rationalMoney->multipliedBy($operand);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertRationalMoneyEquals($expected, $actual);
         }
     }
@@ -123,7 +123,7 @@ final class RationalMoneyTest extends AbstractTestCase
 
         $actual = $rationalMoney->dividedBy($operand);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertRationalMoneyEquals($expected, $actual);
         }
     }
@@ -164,7 +164,7 @@ final class RationalMoneyTest extends AbstractTestCase
 
         $actual = $rationalMoney->to($context, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertMoneyIs($expected, $actual);
         }
     }

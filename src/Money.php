@@ -98,7 +98,7 @@ class Money extends AbstractMoney implements MoneyInterface
         ?Context $context = null,
         RoundingMode $roundingMode = RoundingMode::UNNECESSARY,
     ): static {
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = Currency::of($currency);
         }
 
@@ -134,7 +134,7 @@ class Money extends AbstractMoney implements MoneyInterface
         ?Context $context = null,
         RoundingMode $roundingMode = RoundingMode::UNNECESSARY,
     ): static {
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = Currency::of($currency);
         }
 
@@ -149,7 +149,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
     public static function zero(Currency|string|int $currency, ?Context $context = null): static
     {
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = Currency::of($currency);
         }
 
@@ -270,7 +270,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
     public function allocate(int ...$ratios): array
     {
-        if (! $ratios) {
+        if (!$ratios) {
             throw new InvalidArgumentException('Cannot allocate() an empty list of ratios.');
         }
 
@@ -319,7 +319,7 @@ class Money extends AbstractMoney implements MoneyInterface
 
     public function allocateWithRemainder(int ...$ratios): array
     {
-        if (! $ratios) {
+        if (!$ratios) {
             throw new InvalidArgumentException('Cannot allocateWithRemainder() an empty list of ratios.');
         }
 
@@ -412,7 +412,7 @@ class Money extends AbstractMoney implements MoneyInterface
         ?Context $context = null,
         RoundingMode $roundingMode = RoundingMode::UNNECESSARY,
     ): static {
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = Currency::of($currency);
         }
 
@@ -440,7 +440,7 @@ class Money extends AbstractMoney implements MoneyInterface
         static $lastFormatterLocale;
         static $lastFormatterScale;
 
-        if ($allowWholeNumber && ! $this->amount->hasNonZeroFractionalPart()) {
+        if ($allowWholeNumber && !$this->amount->hasNonZeroFractionalPart()) {
             $scale = 0;
         } else {
             $scale = $this->amount->getScale();

@@ -107,7 +107,7 @@ final class PDOProviderTest extends AbstractTestCase
 
         $actualRate = $provider->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             self::assertEquals($expectedResult, $actualRate);
         }
     }
@@ -159,7 +159,7 @@ final class PDOProviderTest extends AbstractTestCase
 
         $actualRate = $provider->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             self::assertEquals($expectedResult, $actualRate);
         }
     }
@@ -211,7 +211,7 @@ final class PDOProviderTest extends AbstractTestCase
 
         $actualRate = $provider->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             self::assertEquals($expectedResult, $actualRate);
         }
     }
@@ -271,7 +271,7 @@ final class PDOProviderTest extends AbstractTestCase
 
         $actualRate = $provider->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             self::assertEquals($expectedResult, $actualRate);
         }
     }

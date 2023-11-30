@@ -44,7 +44,7 @@ final class MoneyTest extends AbstractTestCase
 
         $money = Money::of(...$args);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             $this->assertMoneyIs($expectedResult, $money);
         }
     }
@@ -78,7 +78,7 @@ final class MoneyTest extends AbstractTestCase
 
         $money = Money::ofMinor(...$args);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             $this->assertMoneyIs($expectedResult, $money);
         }
     }
@@ -120,7 +120,7 @@ final class MoneyTest extends AbstractTestCase
 
         $result = $money->to($context, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertMoneyIs($expected, $result);
         }
     }
@@ -161,7 +161,7 @@ final class MoneyTest extends AbstractTestCase
 
         $actual = $money->plus($plus, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertMoneyIs($expected, $actual);
         }
     }
@@ -217,7 +217,7 @@ final class MoneyTest extends AbstractTestCase
 
         $actual = $money->minus($minus, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertMoneyIs($expected, $actual);
         }
     }
@@ -255,7 +255,7 @@ final class MoneyTest extends AbstractTestCase
 
         $actual = $money->multipliedBy($multiplier, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertMoneyIs($expected, $actual);
         }
     }
@@ -292,7 +292,7 @@ final class MoneyTest extends AbstractTestCase
 
         $actual = $money->dividedBy($divisor, $roundingMode);
 
-        if (! $this->isExceptionClass($expected)) {
+        if (!$this->isExceptionClass($expected)) {
             $this->assertMoneyIs($expected, $actual);
         }
     }
@@ -855,7 +855,7 @@ final class MoneyTest extends AbstractTestCase
 
         $actualResult = Money::min(...$monies);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             $this->assertMoneyIs($expectedResult, $actualResult);
         }
     }
@@ -887,7 +887,7 @@ final class MoneyTest extends AbstractTestCase
 
         $actualResult = Money::max(...$monies);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             $this->assertMoneyIs($expectedResult, $actualResult);
         }
     }

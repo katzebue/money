@@ -106,11 +106,11 @@ final class ISOCurrencyProvider
             return $this->currencies[$currencyCode];
         }
 
-        if (! isset($this->currencyData[$currencyCode])) {
+        if (!isset($this->currencyData[$currencyCode])) {
             throw UnknownCurrencyException::unknownCurrency($currencyCode);
         }
 
-        $currency = new Currency(... $this->currencyData[$currencyCode]);
+        $currency = new Currency(...$this->currencyData[$currencyCode]);
 
         return $this->currencies[$currencyCode] = $currency;
     }
@@ -126,8 +126,8 @@ final class ISOCurrencyProvider
     {
         if ($this->isPartial) {
             foreach ($this->currencyData as $currencyCode => $data) {
-                if (! isset($this->currencies[$currencyCode])) {
-                    $this->currencies[$currencyCode] = new Currency(... $data);
+                if (!isset($this->currencies[$currencyCode])) {
+                    $this->currencies[$currencyCode] = new Currency(...$data);
                 }
             }
 

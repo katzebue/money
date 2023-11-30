@@ -100,7 +100,7 @@ final class MoneyComparatorTest extends AbstractTestCase
 
         $actualMin = $comparator->min(...$monies);
 
-        if (! $this->isExceptionClass($expectedMin)) {
+        if (!$this->isExceptionClass($expectedMin)) {
             $this->assertMoneyIs($expectedMin, $actualMin);
         }
     }
@@ -136,7 +136,7 @@ final class MoneyComparatorTest extends AbstractTestCase
 
         $actualMin = $comparator->max(...$monies);
 
-        if (! $this->isExceptionClass($expectedMin)) {
+        if (!$this->isExceptionClass($expectedMin)) {
             $this->assertMoneyIs($expectedMin, $actualMin);
         }
     }

@@ -63,7 +63,7 @@ final readonly class CurrencyConverter
      */
     public function convertToRational(MoneyContainer $moneyContainer, Currency|string|int $currency): RationalMoney
     {
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = Currency::of($currency);
         }
 

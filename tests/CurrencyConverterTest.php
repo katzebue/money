@@ -53,7 +53,7 @@ final class CurrencyConverterTest extends AbstractTestCase
 
         $actualResult = $currencyConverter->convert($money, $toCurrency, null, $roundingMode);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             $this->assertMoneyIs($expectedResult, $actualResult);
         }
     }
@@ -160,7 +160,7 @@ final class CurrencyConverterTest extends AbstractTestCase
 
         $actualResult = $currencyConverter->convert($rationalMoney, $toCurrency, null, $roundingMode);
 
-        if (! $this->isExceptionClass($expectedResult)) {
+        if (!$this->isExceptionClass($expectedResult)) {
             $this->assertMoneyIs($expectedResult, $actualResult);
         }
     }

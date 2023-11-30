@@ -40,7 +40,7 @@ final class RationalMoney extends AbstractMoney
     {
         $amount = BigRational::of($amount);
 
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = Currency::of($currency);
         }
 
