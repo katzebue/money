@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Katzebue\Money\Tests;
 
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
 use Brick\Math\BigRational;
@@ -777,7 +778,6 @@ final class MoneyTest extends AbstractTestCase
     }
 
     /**
-     * @requires extension intl
      *
      * @param array  $money    The money to test.
      * @param string $locale   The target locale.
@@ -785,6 +785,7 @@ final class MoneyTest extends AbstractTestCase
      * @param string $expected The expected output.
      */
     #[DataProvider('providerFormatWith')]
+    #[RequiresPhpExtension('intl')]
     public function testFormatWith(array $money, string $locale, string $symbol, string $expected): void
     {
         $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
@@ -801,7 +802,6 @@ final class MoneyTest extends AbstractTestCase
     }
 
     /**
-     * @requires extension intl
      *
      * @param array  $money            The money to test.
      * @param string $locale           The target locale.
@@ -809,6 +809,7 @@ final class MoneyTest extends AbstractTestCase
      * @param string $expected         The expected output.
      */
     #[DataProvider('providerFormatTo')]
+    #[RequiresPhpExtension('intl')]
     public function testFormatTo(array $money, string $locale, bool $allowWholeNumber, string $expected): void
     {
         self::assertSame($expected, Money::of(...$money)->formatTo($locale, $allowWholeNumber));

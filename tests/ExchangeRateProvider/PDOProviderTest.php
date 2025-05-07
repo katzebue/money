@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Katzebue\Money\Tests\ExchangeRateProvider;
 
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use Closure;
 use InvalidArgumentException;
 use Iterator;
@@ -16,9 +17,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for class PDOProvider.
- *
- * @requires extension pdo_sqlite
  */
+#[RequiresPhpExtension('pdo_sqlite')]
 final class PDOProviderTest extends AbstractTestCase
 {
     /**
