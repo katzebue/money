@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.2",
         "ext-json": "*",
-        "brick/math": "^0.12.1"
+        "brick/math": "^0.13"
     },
     "require-dev": {
         "ext-dom": "*",
